@@ -1,0 +1,89 @@
+﻿@model IEnumerable<Meditrack.Models.Paciente>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NombrePaciente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaNacimiento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SexoPaciente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EdadPaciente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdentificacionPaciente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NacionalidadPaciente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TelefonoPaciente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TipoSanguineo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SeguroMedico)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HistorialMedico)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombrePaciente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaNacimiento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SexoPaciente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EdadPaciente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdentificacionPaciente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NacionalidadPaciente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TelefonoPaciente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoSanguineo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SeguroMedico)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HistorialMedico)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdPaciente">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdPaciente">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdPaciente">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

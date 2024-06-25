@@ -40,6 +40,11 @@ namespace Meditrack.Controllers
         {
             return View();
         }
+        public IActionResult Principal()
+        {
+            return View();
+        }
+
         [HttpPost]
         public async Task<IActionResult> IniciarSesion(string nombreusuario, string contrasena)
         {
@@ -70,7 +75,7 @@ namespace Meditrack.Controllers
                 properties);
 
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Principal");
         }
 
 

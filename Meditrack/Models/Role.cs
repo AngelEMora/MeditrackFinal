@@ -7,7 +7,8 @@ namespace Meditrack.Models
     {
         public Role()
         {
-            Usuarios = new HashSet<Usuario>();
+            UsuarioNombreRolNavigations = new HashSet<Usuario>();
+            UsuarioRols = new HashSet<Usuario>();
         }
 
         public int IdRol { get; set; }
@@ -16,6 +17,7 @@ namespace Meditrack.Models
         public DateTime? FechaCreacion { get; set; }
         public bool? Activo { get; set; }
 
-        public virtual ICollection<Usuario> Usuarios { get; set; }
+        public virtual ICollection<Usuario> UsuarioNombreRolNavigations { get; set; }
+        public virtual ICollection<Usuario> UsuarioRols { get; set; }
     }
 }

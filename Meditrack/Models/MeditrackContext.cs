@@ -27,7 +27,7 @@ namespace Meditrack.Models
             if (!optionsBuilder.IsConfigured)
             {
 //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-//                optionsBuilder.UseSqlServer("Data Source=LAPTOP-S0US5BOR\\MSSQLSERVER01;Initial Catalog=Meditrack;Integrated Security=True");
+                //optionsBuilder.UseSqlServer("Server=LAPTOP-S0US5BOR\\MSSQLSERVER01;Database=Meditrack;Trusted_Connection=True;");
             }
         }
 
@@ -129,6 +129,9 @@ namespace Meditrack.Models
                 entity.HasKey(e => e.IdRol)
                     .HasName("PK__Roles__202AD220B5D1DF9D");
 
+                entity.HasIndex(e => e.Nombre, "idx_nombre")
+                    .IsUnique();
+
                 entity.Property(e => e.IdRol).HasColumnName("ID_Rol");
 
                 entity.Property(e => e.Activo).HasDefaultValueSql("((1))");
@@ -157,7 +160,7 @@ namespace Meditrack.Models
                 entity.Property(e => e.IdUsuario).HasColumnName("ID_Usuario");
 
                 entity.Property(e => e.Contrasena)
-                    .HasMaxLength(30)
+                    .HasMaxLength(100)
                     .IsUnicode(false);
 
                 entity.Property(e => e.FechaDeRegistro)
@@ -172,6 +175,10 @@ namespace Meditrack.Models
                     .HasMaxLength(80)
                     .IsUnicode(false);
 
+                entity.Property(e => e.NombreRol)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.NombreUsuario)
                     .HasMaxLength(50)
                     .IsUnicode(false);
@@ -181,8 +188,14 @@ namespace Meditrack.Models
                     .HasForeignKey(d => d.IdEstadoUsuario)
                     .HasConstraintName("FK__Usuario__ID_Esta__35BCFE0A");
 
+                entity.HasOne(d => d.NombreRolNavigation)
+                    .WithMany(p => p.UsuarioNombreRolNavigations)
+                    .HasPrincipalKey(p => p.Nombre)
+                    .HasForeignKey(d => d.NombreRol)
+                    .HasConstraintName("FK_NombreRol");
+
                 entity.HasOne(d => d.Rol)
-                    .WithMany(p => p.Usuarios)
+                    .WithMany(p => p.UsuarioRols)
                     .HasForeignKey(d => d.RolId)
                     .HasConstraintName("FK__Usuario__RolId__34C8D9D1");
             });

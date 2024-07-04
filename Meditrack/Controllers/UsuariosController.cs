@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Meditrack.Models;
-using System.Security.Claims;
 
 namespace Meditrack.Controllers
 {
@@ -22,7 +21,7 @@ namespace Meditrack.Controllers
         // GET: Usuarios
         public async Task<IActionResult> Index()
         {
-            var meditrackContext = _context.Usuarios.Include(u => u.IdEstadoUsuarioNavigation).Include(u => u.Rol);
+            var meditrackContext = _context.Usuarios.Include(u => u.IdEstadoUsuarioNavigation).Include(u => u.NombreRolNavigation).Include(u => u.Rol);
             return View(await meditrackContext.ToListAsync());
         }
 
@@ -36,6 +35,7 @@ namespace Meditrack.Controllers
 
             var usuario = await _context.Usuarios
                 .Include(u => u.IdEstadoUsuarioNavigation)
+                .Include(u => u.NombreRolNavigation)
                 .Include(u => u.Rol)
                 .FirstOrDefaultAsync(m => m.IdUsuario == id);
             if (usuario == null)
@@ -50,7 +50,8 @@ namespace Meditrack.Controllers
         public IActionResult Create()
         {
             ViewData["IdEstadoUsuario"] = new SelectList(_context.EstadoUsuarios, "IdEstadoUsuario", "IdEstadoUsuario");
-            ViewData["RolId"] = new SelectList(_context.Roles, "IdRol", "IdRol");
+            ViewData["NombreRol"] = new SelectList(_context.Roles, "Nombre", "Nombre");
+            ViewData["RolId"] = new SelectList(_context.Roles, "IdRol", "Nombre");
             return View();
         }
 
@@ -59,7 +60,7 @@ namespace Meditrack.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdUsuario,NombreUsuario,Contrasena,NombreCompleto,RolId,FechaDeRegistro,IdEstadoUsuario")] Usuario usuario)
+        public async Task<IActionResult> Create([Bind("IdUsuario,NombreUsuario,Contrasena,NombreCompleto,RolId,FechaDeRegistro,IdEstadoUsuario,NombreRol")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {
@@ -68,7 +69,8 @@ namespace Meditrack.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["IdEstadoUsuario"] = new SelectList(_context.EstadoUsuarios, "IdEstadoUsuario", "IdEstadoUsuario", usuario.IdEstadoUsuario);
-            ViewData["RolId"] = new SelectList(_context.Roles, "IdRol", "IdRol", usuario.RolId);
+            ViewData["NombreRol"] = new SelectList(_context.Roles, "Nombre", "Nombre", usuario.NombreRol);
+            ViewData["RolId"] = new SelectList(_context.Roles, "IdRol", "Nombre", usuario.RolId);
             return View(usuario);
         }
 
@@ -86,7 +88,8 @@ namespace Meditrack.Controllers
                 return NotFound();
             }
             ViewData["IdEstadoUsuario"] = new SelectList(_context.EstadoUsuarios, "IdEstadoUsuario", "IdEstadoUsuario", usuario.IdEstadoUsuario);
-            ViewData["RolId"] = new SelectList(_context.Roles, "IdRol", "IdRol", usuario.RolId);
+            ViewData["NombreRol"] = new SelectList(_context.Roles, "Nombre", "Nombre", usuario.NombreRol);
+            ViewData["RolId"] = new SelectList(_context.Roles, "IdRol", "Nombre", usuario.RolId);
             return View(usuario);
         }
 
@@ -95,7 +98,7 @@ namespace Meditrack.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdUsuario,NombreUsuario,Contrasena,NombreCompleto,RolId,FechaDeRegistro,IdEstadoUsuario")] Usuario usuario)
+        public async Task<IActionResult> Edit(int id, [Bind("IdUsuario,NombreUsuario,Contrasena,NombreCompleto,RolId,FechaDeRegistro,IdEstadoUsuario,NombreRol")] Usuario usuario)
         {
             if (id != usuario.IdUsuario)
             {
@@ -123,7 +126,8 @@ namespace Meditrack.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["IdEstadoUsuario"] = new SelectList(_context.EstadoUsuarios, "IdEstadoUsuario", "IdEstadoUsuario", usuario.IdEstadoUsuario);
-            ViewData["RolId"] = new SelectList(_context.Roles, "IdRol", "IdRol", usuario.RolId);
+            ViewData["NombreRol"] = new SelectList(_context.Roles, "Nombre", "Nombre", usuario.NombreRol);
+            ViewData["RolId"] = new SelectList(_context.Roles, "IdRol", "Nombre", usuario.RolId);
             return View(usuario);
         }
 
@@ -137,6 +141,7 @@ namespace Meditrack.Controllers
 
             var usuario = await _context.Usuarios
                 .Include(u => u.IdEstadoUsuarioNavigation)
+                .Include(u => u.NombreRolNavigation)
                 .Include(u => u.Rol)
                 .FirstOrDefaultAsync(m => m.IdUsuario == id);
             if (usuario == null)
@@ -170,7 +175,5 @@ namespace Meditrack.Controllers
         {
           return (_context.Usuarios?.Any(e => e.IdUsuario == id)).GetValueOrDefault();
         }
-
-       
     }
 }

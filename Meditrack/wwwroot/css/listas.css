@@ -1,0 +1,224 @@
+﻿
+/*body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7f9;
+    color: #333;
+
+
+}
+
+h1 {
+    color: #0d47a1;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+a {
+    color: #0d47a1;
+    text-decoration: none;
+}
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+.table {
+    width: 99%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+    .table th, .table td {
+        padding: 12px 15px;
+        text-align: center;
+        border-bottom: 1px solid #f4f7f9;
+    }
+
+    .table th {
+        background-color: #1565c0;
+        color: #fff;
+    }
+
+    .table tr:nth-of-type(even) {
+        background-color: #f3f3f3;
+    }
+
+    .table tr:hover {
+        background-color: #e1f5fe;
+    }
+
+    .table a {
+        color: #0d47a1;
+        padding: 5px 10px;
+        border: 1px solid #0d47a1;
+        border-radius: 5px;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+        .table a:hover {
+            background-color: #0d47a1;
+            color: #fff;
+        }
+
+p {
+    text-align: center;
+}
+
+    p a {
+        background-color: #0d47a1;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+        p a:hover {
+            background-color: #1565c0;
+        }
+*/
+
+/* wwwroot/css/site.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    color: #0d47a1;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #1565c0;
+    color: #fff;
+}
+
+    .navbar .logo {
+        display: flex;
+        align-items: center;
+    }
+
+        .navbar .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+    .navbar .user-info {
+        display: flex;
+        align-items: center;
+    }
+
+        .navbar .user-info span {
+            margin-right: 15px;
+        }
+
+        .navbar .user-info img {
+            height: 30px;
+            cursor: pointer;
+        }
+
+.container {
+    width: 99%;
+    margin: 0 auto;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+    .action-buttons .search-bar {
+        margin-right: 20px;
+    }
+
+.search-bar input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 200px;
+}
+
+.search-bar button {
+    background-color: #0d47a1;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+    .search-bar button:hover {
+        background-color: #1565c0;
+    }
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+    .table th, .table td {
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .table th {
+        background-color: #1565c0;
+        color: #fff;
+    }
+
+    .table tr:nth-of-type(even) {
+        background-color: #f3f3f3;
+    }
+
+    .table tr:hover {
+        background-color: #e1f5fe;
+    }
+
+    .table .actions a {
+        color: #0d47a1;
+        padding: 5px 10px;
+        border: 1px solid #0d47a1;
+        border-radius: 5px;
+        transition: background-color 0.3s, color 0.3s;
+        margin-right: 5px;
+    }
+
+        .table .actions a:hover {
+            background-color: #0d47a1;
+            color: #fff;
+        }
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+    .pagination a {
+        color: #0d47a1;
+        padding: 10px 15px;
+        border: 1px solid #ddd;
+        margin: 0 5px;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+        .pagination a:hover {
+            background-color: #0d47a1;
+            color: #fff;
+        }

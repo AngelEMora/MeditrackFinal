@@ -9,39 +9,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menú de Imágenes</title>
-    <link rel="stylesheet" href="./principal.css">
+    <link rel="stylesheet" href="./css/principal.css">
 
 
     <link href="~/css/principal.css" rel="stylesheet" media="all" />
 </head>
 <body>
+
+    <div class="navbar">
+        <div class="navbar-left">
+            <img src="/images/MediTracklogo.png" alt="Logo de la página" class="navbar-logo">
+            <span class="navbar-user">@User.Identity.Name</span>
+        </div>
+        <div class="navbar-right">
+            <a href="@Url.Action("Logout", "Inicio")" class="navbar-item">Salir</a>
+            <a href="/Account/Settings" class="navbar-item">Configuración</a>
+        </div>
+    </div>
+
+
+   
+
     <div class="menu">
         <a href="/Pacientes/Index" class="menu-item">
-            <img src="/MediTrack/Images/PacienteP.avif" alt="Paciente">
+            <img src="/images/PacientePr.png" alt="Paciente">
             <p>Paciente</p>
         </a>
         <div class="menu-item" onclick="navigateTo('doctor.html')">
-            <img src="/MediTrack/Images/profesionales.jpg" alt="Profesional de la salud">
+            <img src="/images/profesionales.jpg" alt="Profesional de la salud">
             <p>Profesional de la salud</p>
         </div>
         <div class="menu-item" onclick="navigateTo('quirofano.html')">
-            <img src="/MediTrack/Images/quirofano.webp" alt="Quirofano">
+            <img src="/images/quirofanoPr.png" alt="Quirofano">
             <p>Quirofano</p>
         </div>
         <a href=/Medicamentos/index  class="menu-item">
-            <img src="/MediTrack/Images/medicamentos.webp" alt="Medicamento">
+            <img src="/images/medicamentos.png" alt="Medicamento">
             <p>Medicamento</p>
         </a>
         <div class="menu-item" onclick="navigateTo('materiales.html')">
-            <img src="/MediTrack/Images/materialesQuirurgicos.jpg" alt="Materiales Quirurgico">
+            <img src="/images/materialesQuirurgicos.jpg" alt="Materiales Quirurgico">
             <p>Materiales Quirurgico</p>
         </div>
         <div class="menu-item" onclick="navigateTo('cirugia.html')">
-            <img src="/MediTrack/Images/logo2.png" alt="Cirugia">
+            <img src="/images/logo2.png" alt="Cirugia">
             <p>Cirugia</p>
         </div>
         <div class="menu-item" onclick="navigateTo('administracion.html')">
-            <img src="/MediTrack/Images/administrador.png" alt="Administracion de usuario">
+            <img src="/images/administrador.png" alt="Administracion de usuario">
             <p>Administracion de usuario</p>
         </div>
     </div>

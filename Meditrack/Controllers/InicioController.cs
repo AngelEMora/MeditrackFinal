@@ -36,6 +36,13 @@ namespace Meditrack.Controllers
             return View();
         }
 
+        // Salida
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("IniciarSesion", "Inicio"); // Redirige al inicio de sesión después de salir
+        }
+
         public IActionResult IniciarSesion()
         {
             return View();
@@ -56,6 +63,7 @@ namespace Meditrack.Controllers
                 ViewData["Mensaje"] = "No se encontro el usuario";
                 return View();
             }
+
 
             List<Claim> claims = new List<Claim>()
             {

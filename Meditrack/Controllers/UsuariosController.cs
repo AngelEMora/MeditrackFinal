@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Meditrack.Models;
+using System.Security.Claims;
 
 namespace Meditrack.Controllers
 {
@@ -169,5 +170,7 @@ namespace Meditrack.Controllers
         {
           return (_context.Usuarios?.Any(e => e.IdUsuario == id)).GetValueOrDefault();
         }
+
+       
     }
 }

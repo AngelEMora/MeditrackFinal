@@ -19,11 +19,34 @@ namespace Meditrack.Controllers
         }
 
         // GET: Pacientes
-        public async Task<IActionResult> Index()
+        //public async Task<IActionResult> Index()
+        //{
+        //      return _context.Pacientes != null ? 
+        //                  View(await _context.Pacientes.ToListAsync()) :
+        //                  Problem("Entity set 'MeditrackContext.Pacientes'  is null.");
+        //}
+
+        public async Task<IActionResult> Index(string searchString, int pageNumber = 1, int pageSize = 10)
         {
-              return _context.Pacientes != null ? 
-                          View(await _context.Pacientes.ToListAsync()) :
-                          Problem("Entity set 'MeditrackContext.Pacientes'  is null.");
+            var pacientes = from p in _context.Pacientes
+                            select p;
+
+            // Filtrado por búsqueda
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                pacientes = pacientes.Where(p => p.NombrePaciente.Contains(searchString));
+            }
+
+            // Paginación
+            int totalRecords = await pacientes.CountAsync();
+            var pacientesList = await pacientes.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
+
+            ViewBag.PageNumber = pageNumber;
+            ViewBag.PageSize = pageSize;
+            ViewBag.TotalRecords = totalRecords;
+            ViewBag.SearchString = searchString;
+
+            return View(pacientesList);
         }
 
         // GET: Pacientes/Details/5

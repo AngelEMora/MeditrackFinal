@@ -23,6 +23,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     {
         options.LoginPath = "/Inicio/IniciarSesion";
         options.ExpireTimeSpan = TimeSpan.FromMinutes(50);
+        options.LogoutPath = "/Inicio/Logout"; // Ruta de cierre de sesión
     }
     );
 

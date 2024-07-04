@@ -64,7 +64,7 @@ namespace Meditrack.Controllers
                 return NotFound();
             }
 
-            return View(paciente);
+            return View("Details", paciente);
         }
 
         // GET: Pacientes/Create
@@ -86,7 +86,7 @@ namespace Meditrack.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(paciente);
+            return View("Create",paciente);
         }
 
         // GET: Pacientes/Edit/5
@@ -137,7 +137,7 @@ namespace Meditrack.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(paciente);
+            return View("Edit",paciente);
         }
 
         // GET: Pacientes/Delete/5

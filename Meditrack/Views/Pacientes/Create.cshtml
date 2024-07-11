@@ -156,7 +156,8 @@
 
             <div class="form-group">
                 <label asp-for="NacionalidadPaciente" class="control-label">Nacionalidad</label>
-                <input asp-for="NacionalidadPaciente" class="box" />
+                    <select asp-for="NacionalidadPaciente" class="form-control" asp-items="ViewBag.Nacionalidades">
+                    </select>
                 <span asp-validation-for="NacionalidadPaciente" class="text-danger"></span>
             </div>
         </div>
@@ -182,7 +183,7 @@
 
             <div class="form-group">
                 <label asp-for="SeguroMedico" class="control-label">Seguro Médico</label>
-                <input asp-for="SeguroMedico" type="number" class="box" />
+                <input asp-for="SeguroMedico" class="box" />
                 <span asp-validation-for="SeguroMedico" class="text-danger"></span>
             </div>
         </div>

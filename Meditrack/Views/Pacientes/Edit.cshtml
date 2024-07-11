@@ -41,7 +41,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="NacionalidadPaciente" class="control-label"></label>
-                <input asp-for="NacionalidadPaciente" class="form-control" />
+                <select asp-for="NacionalidadPaciente" class="form-control" asp-items="ViewBag.Nacionalidades">
+                </select>
                 <span asp-validation-for="NacionalidadPaciente" class="text-danger"></span>
             </div>
             <div class="form-group">

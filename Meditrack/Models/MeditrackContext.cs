@@ -16,9 +16,12 @@ namespace Meditrack.Models
         {
         }
 
+        public virtual DbSet<Doctore> Doctores { get; set; } = null!;
+        public virtual DbSet<EstadoQuirofano> EstadoQuirofanos { get; set; } = null!;
         public virtual DbSet<EstadoUsuario> EstadoUsuarios { get; set; } = null!;
         public virtual DbSet<Medicamento> Medicamentos { get; set; } = null!;
         public virtual DbSet<Paciente> Pacientes { get; set; } = null!;
+        public virtual DbSet<Quirofano> Quirofanos { get; set; } = null!;
         public virtual DbSet<Role> Roles { get; set; } = null!;
         public virtual DbSet<Usuario> Usuarios { get; set; } = null!;
 
@@ -27,12 +30,68 @@ namespace Meditrack.Models
             if (!optionsBuilder.IsConfigured)
             {
 //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                //optionsBuilder.UseSqlServer("Server=LAPTOP-S0US5BOR\\MSSQLSERVER01;Database=Meditrack;Trusted_Connection=True;");
+  //              optionsBuilder.UseSqlServer("Server=LAPTOP-S0US5BOR\\MSSQLSERVER01;Database=Meditrack;Trusted_Connection=True;");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Doctore>(entity =>
+            {
+                entity.HasKey(e => e.IdDoctor)
+                    .HasName("PK__Doctores__3246951CD27539D8");
+
+                entity.HasIndex(e => e.IdentificacionDoctor, "UQ__Doctores__6C1F6B4221F03C51")
+                    .IsUnique();
+
+                entity.Property(e => e.IdDoctor).HasColumnName("ID_Doctor");
+
+                entity.Property(e => e.Especialidad)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.IdentificacionDoctor)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.NacionalidadDoctor)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.NombreDoctor)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.SexoDoctor)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .IsFixedLength();
+
+                entity.Property(e => e.TelefonoDoctor)
+                    .HasMaxLength(15)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<EstadoQuirofano>(entity =>
+            {
+                entity.HasKey(e => e.IdEstado)
+                    .HasName("PK__EstadoQu__9CF49395DF1BD5D7");
+
+                entity.ToTable("EstadoQuirofano");
+
+                entity.Property(e => e.IdEstado).HasColumnName("ID_Estado");
+
+                entity.Property(e => e.Activo).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.DescripcionEstado)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FechaCreacion)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(sysdatetime())");
+            });
+
             modelBuilder.Entity<EstadoUsuario>(entity =>
             {
                 entity.HasKey(e => e.IdEstadoUsuario)
@@ -109,6 +168,10 @@ namespace Meditrack.Models
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
+                entity.Property(e => e.SeguroMedico)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.SexoPaciente)
                     .HasMaxLength(1)
                     .IsUnicode(false)
@@ -122,6 +185,35 @@ namespace Meditrack.Models
                     .HasMaxLength(1)
                     .IsUnicode(false)
                     .IsFixedLength();
+            });
+
+            modelBuilder.Entity<Quirofano>(entity =>
+            {
+                entity.HasKey(e => e.IdQuirofano)
+                    .HasName("PK__Quirofan__44526D2266504D3A");
+
+                entity.Property(e => e.IdQuirofano).HasColumnName("ID_Quirofano");
+
+                entity.Property(e => e.DescripcionEstado)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DescripcionEstadoQuirofano)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.NombreQuirofano)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Ubicacion)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.EstadoQuirofanoNavigation)
+                    .WithMany(p => p.Quirofanos)
+                    .HasForeignKey(d => d.EstadoQuirofano)
+                    .HasConstraintName("FK__Quirofano__Estad__5812160E");
             });
 
             modelBuilder.Entity<Role>(entity =>

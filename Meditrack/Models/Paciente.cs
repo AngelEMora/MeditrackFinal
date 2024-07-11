@@ -14,7 +14,7 @@ namespace Meditrack.Models
         public string? NacionalidadPaciente { get; set; }
         public string? TelefonoPaciente { get; set; }
         public string? TipoSanguineo { get; set; }
-        public int? SeguroMedico { get; set; }
+        public string? SeguroMedico { get; set; }
         public string? HistorialMedico { get; set; }
     }
 }

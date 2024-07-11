@@ -9,65 +9,42 @@ using Meditrack.Models;
 
 namespace Meditrack.Controllers
 {
-    public class PacientesController : Controller
+    public class DoctoresController : Controller
     {
         private readonly MeditrackContext _context;
 
-        public PacientesController(MeditrackContext context)
+        public DoctoresController(MeditrackContext context)
         {
             _context = context;
         }
 
-        // GET: Pacientes
-        //public async Task<IActionResult> Index()
-        //{
-        //      return _context.Pacientes != null ? 
-        //                  View(await _context.Pacientes.ToListAsync()) :
-        //                  Problem("Entity set 'MeditrackContext.Pacientes'  is null.");
-        //}
-
-        public async Task<IActionResult> Index(string searchString, int pageNumber = 1, int pageSize = 10)
+        // GET: Doctores
+        public async Task<IActionResult> Index()
         {
-            var pacientes = from p in _context.Pacientes
-                            select p;
-
-            // Filtrado por búsqueda
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                pacientes = pacientes.Where(p => p.NombrePaciente.Contains(searchString));
-            }
-
-            // Paginación
-            int totalRecords = await pacientes.CountAsync();
-            var pacientesList = await pacientes.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
-
-            ViewBag.PageNumber = pageNumber;
-            ViewBag.PageSize = pageSize;
-            ViewBag.TotalRecords = totalRecords;
-            ViewBag.SearchString = searchString;
-
-            return View(pacientesList);
+              return _context.Doctores != null ? 
+                          View(await _context.Doctores.ToListAsync()) :
+                          Problem("Entity set 'MeditrackContext.Doctores'  is null.");
         }
 
-        // GET: Pacientes/Details/5
+        // GET: Doctores/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Pacientes == null)
+            if (id == null || _context.Doctores == null)
             {
                 return NotFound();
             }
 
-            var paciente = await _context.Pacientes
-                .FirstOrDefaultAsync(m => m.IdPaciente == id);
-            if (paciente == null)
+            var doctore = await _context.Doctores
+                .FirstOrDefaultAsync(m => m.IdDoctor == id);
+            if (doctore == null)
             {
                 return NotFound();
             }
 
-            return View("Details", paciente);
+            return View(doctore);
         }
 
-        // GET: Pacientes/Create
+        // GET: Doctores/Create
         public IActionResult Create()
         {
             ViewBag.Nacionalidades = new SelectList(new[]
@@ -98,35 +75,42 @@ namespace Meditrack.Controllers
     "Zambia", "Zimbabwe"
 });
 
+
+            ViewBag.Sexos = new SelectList(new[]
+    {
+        new { Value = "M", Text = "Masculino" },
+        new { Value = "F", Text = "Femenino" }
+    }, "Value", "Text");
+
             return View();
         }
 
-        // POST: Pacientes/Create
+        // POST: Doctores/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdPaciente,NombrePaciente,FechaNacimiento,SexoPaciente,EdadPaciente,IdentificacionPaciente,NacionalidadPaciente,TelefonoPaciente,TipoSanguineo,SeguroMedico,HistorialMedico")] Paciente paciente)
+        public async Task<IActionResult> Create([Bind("IdDoctor,NombreDoctor,TelefonoDoctor,EdadDoctor,NacionalidadDoctor,IdentificacionDoctor,SexoDoctor,Especialidad")] Doctore doctore)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(paciente);
+                _context.Add(doctore);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View("Create",paciente);
+            return View(doctore);
         }
 
-        // GET: Pacientes/Edit/5
+        // GET: Doctores/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Pacientes == null)
+            if (id == null || _context.Doctores == null)
             {
                 return NotFound();
             }
 
-            var paciente = await _context.Pacientes.FindAsync(id);
-            if (paciente == null)
+            var doctore = await _context.Doctores.FindAsync(id);
+            if (doctore == null)
             {
                 return NotFound();
             }
@@ -159,17 +143,24 @@ namespace Meditrack.Controllers
     "Zambia", "Zimbabwe"
 });
 
-            return View(paciente);
+
+            ViewBag.Sexos = new SelectList(new[]
+    {
+        new { Value = "M", Text = "Masculino" },
+        new { Value = "F", Text = "Femenino" }
+    }, "Value", "Text");
+
+            return View(doctore);
         }
 
-        // POST: Pacientes/Edit/5
+        // POST: Doctores/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdPaciente,NombrePaciente,FechaNacimiento,SexoPaciente,EdadPaciente,IdentificacionPaciente,NacionalidadPaciente,TelefonoPaciente,TipoSanguineo,SeguroMedico,HistorialMedico")] Paciente paciente)
+        public async Task<IActionResult> Edit(int id, [Bind("IdDoctor,NombreDoctor,TelefonoDoctor,EdadDoctor,NacionalidadDoctor,IdentificacionDoctor,SexoDoctor,Especialidad")] Doctore doctore)
         {
-            if (id != paciente.IdPaciente)
+            if (id != doctore.IdDoctor)
             {
                 return NotFound();
             }
@@ -178,12 +169,12 @@ namespace Meditrack.Controllers
             {
                 try
                 {
-                    _context.Update(paciente);
+                    _context.Update(doctore);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PacienteExists(paciente.IdPaciente))
+                    if (!DoctoreExists(doctore.IdDoctor))
                     {
                         return NotFound();
                     }
@@ -194,49 +185,49 @@ namespace Meditrack.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View("Edit",paciente);
+            return View(doctore);
         }
 
-        // GET: Pacientes/Delete/5
+        // GET: Doctores/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Pacientes == null)
+            if (id == null || _context.Doctores == null)
             {
                 return NotFound();
             }
 
-            var paciente = await _context.Pacientes
-                .FirstOrDefaultAsync(m => m.IdPaciente == id);
-            if (paciente == null)
+            var doctore = await _context.Doctores
+                .FirstOrDefaultAsync(m => m.IdDoctor == id);
+            if (doctore == null)
             {
                 return NotFound();
             }
 
-            return View(paciente);
+            return View(doctore);
         }
 
-        // POST: Pacientes/Delete/5
+        // POST: Doctores/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Pacientes == null)
+            if (_context.Doctores == null)
             {
-                return Problem("Entity set 'MeditrackContext.Pacientes'  is null.");
+                return Problem("Entity set 'MeditrackContext.Doctores'  is null.");
             }
-            var paciente = await _context.Pacientes.FindAsync(id);
-            if (paciente != null)
+            var doctore = await _context.Doctores.FindAsync(id);
+            if (doctore != null)
             {
-                _context.Pacientes.Remove(paciente);
+                _context.Doctores.Remove(doctore);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PacienteExists(int id)
+        private bool DoctoreExists(int id)
         {
-          return (_context.Pacientes?.Any(e => e.IdPaciente == id)).GetValueOrDefault();
+          return (_context.Doctores?.Any(e => e.IdDoctor == id)).GetValueOrDefault();
         }
     }
 }

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Meditrack.Models;
+using System.Drawing.Printing;
 
 namespace Meditrack.Controllers
 {
@@ -19,11 +20,27 @@ namespace Meditrack.Controllers
         }
 
         // GET: Doctores
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString, int pageNumber = 1, int pageSize = 10)
         {
-              return _context.Doctores != null ? 
-                          View(await _context.Doctores.ToListAsync()) :
-                          Problem("Entity set 'MeditrackContext.Doctores'  is null.");
+            var doctores = from p in _context.Doctores
+                               select p;
+
+            // Filtrado por búsqueda
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                doctores = doctores.Where(p => p.NombreDoctor.Contains(searchString));
+            }
+
+            // Paginación
+            int totalRecords = await doctores.CountAsync();
+            var doctoresList = await doctores.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
+
+            ViewBag.PageNumber = pageNumber;
+            ViewBag.PageSize = pageSize;
+            ViewBag.TotalRecords = totalRecords;
+            ViewBag.SearchString = searchString;
+
+            return View(doctoresList);
         }
 
         // GET: Doctores/Details/5

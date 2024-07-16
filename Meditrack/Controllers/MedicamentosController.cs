@@ -19,11 +19,27 @@ namespace Meditrack.Controllers
         }
 
         // GET: Medicamentos
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString, int pageNumber = 1, int pageSize = 10)
         {
-              return _context.Medicamentos != null ? 
-                          View(await _context.Medicamentos.ToListAsync()) :
-                          Problem("Entity set 'MeditrackContext.Medicamentos'  is null.");
+            var medicamentos = from p in _context.Medicamentos
+                            select p;
+
+            // Filtrado por búsqueda
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                medicamentos = medicamentos.Where(p => p.NombreMedicamento.Contains(searchString));
+            }
+
+            // Paginación
+            int totalRecords = await medicamentos.CountAsync();
+            var medicamentosList = await medicamentos.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
+
+            ViewBag.PageNumber = pageNumber;
+            ViewBag.PageSize = pageSize;
+            ViewBag.TotalRecords = totalRecords;
+            ViewBag.SearchString = searchString;
+
+            return View(medicamentosList);
         }
 
         // GET: Medicamentos/Details/5

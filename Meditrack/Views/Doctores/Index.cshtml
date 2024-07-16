@@ -1,79 +1,97 @@
 ﻿@model IEnumerable<Meditrack.Models.Doctore>
 
 @{
+    ViewData["Title"] = "Index";
     Layout = null;
 }
 
 <!DOCTYPE html>
-
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"] - Meditrack</title>
+    <link rel="stylesheet" href="/css/listas.css" />
 </head>
 <body>
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.NombreDoctor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TelefonoDoctor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EdadDoctor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NacionalidadDoctor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdentificacionDoctor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SexoDoctor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Especialidad)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NombreDoctor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TelefonoDoctor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EdadDoctor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NacionalidadDoctor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdentificacionDoctor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SexoDoctor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Especialidad)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdDoctor">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdDoctor">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdDoctor">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="/images/MediTracklogo.png" alt="Logo" />
+            <span>Meditrack</span>
+        </div>
+        <div class="user-info">
+            <span>@User.Identity.Name</span>
+            <img src="/images/AtrasLogo.png" alt="Salir" onclick="location.href='@Url.Action("Logout", "Account")'" />
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Lista de Doctores</h1>
+        <div class="action-buttons">
+            <form asp-action="Index" method="get" class="search-bar">
+                <input type="text" name="searchString" value="@ViewBag.SearchString" placeholder="Buscar" />
+                <button type="submit"><img src="~/images/search" alt="Buscar" /></button>
+            </form>
+            <a asp-action="Create" class="btn btn-primary">Agregar doctor</a>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Teléfono</th>
+                    <th>Edad</th>
+                    <th>Nacionalidad</th>
+                    <th>Identificación</th>
+                    <th>Sexo</th>
+                    <th>Especialidad</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NombreDoctor)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TelefonoDoctor)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EdadDoctor)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NacionalidadDoctor)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IdentificacionDoctor)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SexoDoctor)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Especialidad)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.IdDoctor">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.IdDoctor">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.IdDoctor">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="pagination">
+            @{
+                int totalRecords = ViewBag.TotalRecords != null ? (int)ViewBag.TotalRecords : 0;
+                int pageSize = ViewBag.PageSize != null ? (int)ViewBag.PageSize : 1;
+
+                int totalPages = (int)Math.Ceiling((double)totalRecords / pageSize);
+                for (int i = 1; i <= totalPages; i++)
+                {
+                    <a asp-action="Index" asp-route-pageNumber="@i" class="@(i == ViewBag.PageNumber ? "active" : "")">@i</a>
+                }
+            }
+        </div>
+    </div>
 </body>
 </html>

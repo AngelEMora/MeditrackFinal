@@ -1,82 +1,101 @@
-﻿@{
-    Layout = null;
-}
-
-
-@model IEnumerable<Meditrack.Models.Medicamento>
+﻿@model IEnumerable<Meditrack.Models.Medicamento>
 
 @{
     ViewData["Title"] = "Index";
+    Layout = null;
 }
 
-<h1>Index</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"] - Meditrack</title>
+    <link rel="stylesheet" href="/css/listas.css" />
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="/images/MediTracklogo.png" alt="Logo" />
+            <span>Meditrack</span>
+        </div>
+        <div class="user-info">
+            <span>@User.Identity.Name</span>
+            <img src="/images/AtrasLogo.png" alt="Salir" onclick="location.href='@Url.Action("Logout", "Account")'" />
+        </div>
+    </nav>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.NombreMedicamento)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TipoMedicamento)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CantidadDisponibleMedicamentos)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Movimiento)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CantidadDisponible)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaVencimiento)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Distribuidor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PuntosReorden)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NombreMedicamento)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TipoMedicamento)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CantidadDisponibleMedicamentos)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Movimiento)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CantidadDisponible)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaVencimiento)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Distribuidor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PuntosReorden)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdMedicamento">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdMedicamento">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdMedicamento">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <div class="container">
+        <h1>Lista de Medicamentos</h1>
+        <div class="action-buttons">
+            <form asp-action="Index" method="get" class="search-bar">
+                <input type="text" name="searchString" value="@ViewBag.SearchString" placeholder="Buscar" />
+                <button type="submit"><img src="~/images/search" alt="Buscar" /></button>
+            </form>
+            <a asp-action="Create" class="btn btn-primary">Agregar medicamento</a>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Tipo</th>
+                    <th>Cantidad Disponible</th>
+                    <th>Movimiento</th>
+                    <th>Cantidad Total</th>
+                    <th>Fecha de Vencimiento</th>
+                    <th>Distribuidor</th>
+                    <th>Puntos de Reorden</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NombreMedicamento)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TipoMedicamento)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CantidadDisponibleMedicamentos)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Movimiento)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CantidadDisponible)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FechaVencimiento)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Distribuidor)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PuntosReorden)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.IdMedicamento">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.IdMedicamento">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.IdMedicamento">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="pagination">
+            @{
+                int totalRecords = ViewBag.TotalRecords != null ? (int)ViewBag.TotalRecords : 0;
+                int pageSize = ViewBag.PageSize != null ? (int)ViewBag.PageSize : 1;
+
+                int totalPages = (int)Math.Ceiling((double)totalRecords / pageSize);
+                for (int i = 1; i <= totalPages; i++)
+                {
+                    <a asp-action="Index" asp-route-pageNumber="@i" class="@(i == ViewBag.PageNumber ? "active" : "")">@i</a>
+                }
+            }
+        </div>
+    </div>
+</body>
+</html>

@@ -19,10 +19,27 @@ namespace Meditrack.Controllers
         }
 
         // GET: Usuarios
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString, int pageNumber = 1, int pageSize = 10)
         {
-            var meditrackContext = _context.Usuarios.Include(u => u.IdEstadoUsuarioNavigation).Include(u => u.NombreRolNavigation).Include(u => u.Rol);
-            return View(await meditrackContext.ToListAsync());
+            var usuarios = from p in _context.Usuarios
+                           select p;
+
+            // Filtrado por búsqueda
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                usuarios = usuarios.Where(p => p.NombreUsuario.Contains(searchString));
+            }
+
+            // Paginación
+            int totalRecords = await usuarios.CountAsync();
+            var usuariosList = await usuarios.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
+
+            ViewBag.PageNumber = pageNumber;
+            ViewBag.PageSize = pageSize;
+            ViewBag.TotalRecords = totalRecords;
+            ViewBag.SearchString = searchString;
+
+            return View(usuariosList);
         }
 
         // GET: Usuarios/Details/5

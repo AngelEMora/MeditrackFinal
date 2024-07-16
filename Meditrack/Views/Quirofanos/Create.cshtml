@@ -1,50 +1,91 @@
 ﻿@model Meditrack.Models.Quirofano
 
 @{
+    ViewData["Title"] = "Create";
     Layout = null;
 }
 
 <!DOCTYPE html>
-
 <html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Create</title>
-</head>
 <body>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>@ViewData["Title"] - Crear </title>
+        <link rel="stylesheet" href="/css/create.css" />
 
-<h4>Quirofano</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="NombreQuirofano" class="control-label"></label>
-                <input asp-for="NombreQuirofano" class="form-control" />
-                <span asp-validation-for="NombreQuirofano" class="text-danger"></span>
+    </head>
+
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="/" class="navbar-logo">
+                <img src="/images/MediTracklogo.png" alt="MediTrack Logo">
+            </a>
+            <div class="navbar-right">
+                <span class="navbar-username">@User.Identity.Name</span>
+                <a href="/" class="navbar-logout">Salir</a>
             </div>
-            <div class="form-group">
-                <label asp-for="Ubicacion" class="control-label"></label>
-                <input asp-for="Ubicacion" class="form-control" />
-                <span asp-validation-for="Ubicacion" class="text-danger"></span>
+        </div>
+    </nav>
+
+    <div class="container">
+        <form class="form" asp-action="Create">
+            <h2>Quirofano</h2>
+            <p>
+                Agradecemos tu dedicación al completar este formulario,
+                que nos ayudará a proporcionar el mejor cuidado posible a
+                nuestros pacientes. La información recopilada será fundamental
+                para comprender mejor las necesidades médicas y garantizar un tratamiento
+                efectivo. Por favor, asegúrate de completar todos los campos
+                requeridos con la información más precisa y actualizada disponible.
+            </p>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label asp-for="NombreQuirofano" class="control-label">Nombre del Quirofano</label>
+                    <input asp-for="NombreQuirofano" class="box" />
+                    <span asp-validation-for="NombreQuirofano" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Ubicacion" class="control-label">Ubicación</label>
+                    <input asp-for="Ubicacion" class="box" />
+                    <span asp-validation-for="Ubicacion" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="EstadoQuirofano" class="control-label"></label>
-                <select asp-for="EstadoQuirofano" class ="form-control" asp-items="ViewBag.EstadoQuirofano"></select>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label asp-for="EstadoQuirofano" class="control-label">Estado del Quirofano</label>
+                    <select asp-for="EstadoQuirofano" class="box" asp-items="ViewBag.EstadoQuirofano"></select>
+                    <span asp-validation-for="EstadoQuirofano" class="text-danger"></span>
+                </div>
             </div>
-         
-            
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
+
+            <input type="submit" value="Enviar" class="submit">
         </form>
-    </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+        <div class="info">
+            <img src="/images/hospitallogo.jpg" class="img-1" alt="MediTrack Logo">
+            <div class="location">
+                <div class="icons">
+                    <ion-icon name="location-outline" class="icono"></ion-icon>
+                    <p>Carretera Mella No. 1 en la ciudad de San Pedro de Macorís, RD.</p>
+                </div>
+                <div class="icons">
+                    <ion-icon name="call-outline" class="icono"></ion-icon>
+                    <p>809-529-7022</p>
+                </div>
+                <div class="icons">
+                    <ion-icon name="mail-outline" class="icono"></ion-icon>
+                    <p>hospitaldr.antoniomusa@hotmail.com</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
 </body>
 </html>

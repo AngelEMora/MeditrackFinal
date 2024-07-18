@@ -1,4 +1,4 @@
-﻿@model Meditrack.Models.Medicamento
+﻿@* @model Meditrack.Models.Medicamento
 
 @{
     ViewData["Title"] = "Delete";
@@ -68,3 +68,84 @@
         <a asp-action="Index">Back to List</a>
     </form>
 </div>
+ *@
+
+           @model Meditrack.Models.Medicamento
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - Delete</title>
+    <link rel="stylesheet" href="/css/delete.css" />
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="/" class="navbar-logo">
+                <img src="/images/MediTracklogo.png" alt="MediTrack Logo">
+            </a>
+            <div class="navbar-right">
+                <span class="navbar-username">@User.Identity.Name</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Eliminar Medicamento</h1>
+        <h3>¿Estás seguro de que deseas eliminar este medicamento?</h3>
+        <div class="details">
+            <h4>Medicamento</h4>
+            <hr />
+            <div class="details-grid">
+                <div class="details-item">
+                    <dt>Nombre del medicamento:</dt>
+                    <dd>@Html.DisplayFor(model => model.NombreMedicamento)</dd>
+                </div>
+                <div class="details-item">
+                    <dt>Tipo:</dt>
+                    <dd>@Html.DisplayFor(model => model.TipoMedicamento)</dd>
+                </div>
+                <div class="details-item">
+                    <dt>Cantidad Disponible:</dt>
+                    <dd>@Html.DisplayFor(model => model.CantidadDisponibleMedicamentos)</dd>
+                </div>
+                <div class="details-item">
+                    <dt>Movimiento:</dt>
+                    <dd>@Html.DisplayFor(model => model.Movimiento)</dd>
+                </div>
+                <div class="details-item">
+                    <dt>Cantidad Disponible:</dt>
+                    <dd>@Html.DisplayFor(model => model.CantidadDisponible)</dd>
+                </div>
+                <div class="details-item">
+                    <dt>Fecha de Vencimiento:</dt>
+                    <dd>@Html.DisplayFor(model => model.FechaVencimiento)</dd>
+                </div>
+                <div class="details-item">
+                    <dt>Distribuidor:</dt>
+                    <dd>@Html.DisplayFor(model => model.Distribuidor)</dd>
+                </div>
+                <div class="details-item">
+                    <dt>Puntos de Reorden:</dt>
+                    <dd>@Html.DisplayFor(model => model.PuntosReorden)</dd>
+                </div>
+            </div>
+        </div>
+
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="IdMedicamento" />
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+            <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
+        </form>
+    </div>
+
+</body>
+</html>

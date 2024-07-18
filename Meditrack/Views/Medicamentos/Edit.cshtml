@@ -1,4 +1,4 @@
-﻿@model Meditrack.Models.Medicamento
+﻿@* @model Meditrack.Models.Medicamento
 
 @{
     ViewData["Title"] = "Edit";
@@ -63,5 +63,125 @@
 
 <div>
     <a asp-action="Index">Back to List</a>
-</div>
+</div> *@
+
+@model Meditrack.Models.Medicamento
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Editar</title>
+    <link rel="stylesheet" href="/css/edit.css" />
+    <!-- Agrega aquí tus estilos adicionales si es necesario -->
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="/" class="navbar-logo">
+                <img src="/images/MediTracklogo.png" alt="MediTrack Logo">
+            </a>
+            <div class="navbar-right">
+                <span class="navbar-username">@User.Identity.Name</span>
+                <a asp-action="Index" class="navbar-logout">Salir</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h2>Editando Medicamento</h2>
+
+        <form asp-action="Edit" method="post" class="form">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdMedicamento" />
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label asp-for="NombreMedicamento" class="control-label">Nombre del Medicamento</label>
+                    <input asp-for="NombreMedicamento" class="box" />
+                    <span asp-validation-for="NombreMedicamento" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="TipoMedicamento" class="control-label">Tipo</label>
+                    <input asp-for="TipoMedicamento" class="box" />
+                    <span asp-validation-for="TipoMedicamento" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="CantidadDisponibleMedicamentos" class="control-label">Cantidad Disponible (Medicamentos)</label>
+                    <input asp-for="CantidadDisponibleMedicamentos" class="box" />
+                    <span asp-validation-for="CantidadDisponibleMedicamentos" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label asp-for="Movimiento" class="control-label">Movimiento</label>
+                    <input asp-for="Movimiento" class="box" />
+                    <span asp-validation-for="Movimiento" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="CantidadDisponible" class="control-label">Cantidad Disponible</label>
+                    <input asp-for="CantidadDisponible" class="box" />
+                    <span asp-validation-for="CantidadDisponible" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="FechaVencimiento" class="control-label">Fecha de Vencimiento</label>
+                    <input asp-for="FechaVencimiento" type="date" class="box" />
+                    <span asp-validation-for="FechaVencimiento" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label asp-for="Distribuidor" class="control-label">Distribuidor</label>
+                    <input asp-for="Distribuidor" class="box" />
+                    <span asp-validation-for="Distribuidor" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="PuntosReorden" class="control-label">Puntos de Reorden</label>
+                    <input asp-for="PuntosReorden" class="box" />
+                    <span asp-validation-for="PuntosReorden" class="text-danger"></span>
+                </div>
+            </div>
+
+            <button type="submit" class="submit">Guardar</button>
+        </form>
+
+        <div class="info">
+            <img src="/images/MediTracklogo.png" class="img-1" alt="MediTrack Logo">
+            <div class="location">
+                <div class="icons">
+                    <ion-icon name="location-outline" class="icono"></ion-icon>
+                    <p>Carretera Mella No. 1 en la ciudad de San Pedro de Macorís, RD.</p>
+                </div>
+                <div class="icons">
+                    <ion-icon name="call-outline" class="icono"></ion-icon>
+                    <p>809-529-7022</p>
+                </div>
+                <div class="icons">
+                    <ion-icon name="mail-outline" class="icono"></ion-icon>
+                    <p>hospitaldr.antoniomusa@hotmail.com</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+</body>
+</html>
+
 

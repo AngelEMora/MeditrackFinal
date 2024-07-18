@@ -1,4 +1,4 @@
-﻿@model Meditrack.Models.Usuario
+﻿@* @model Meditrack.Models.Usuario
 
 @{
     ViewData["Title"] = "Delete";
@@ -56,3 +56,76 @@
         <a asp-action="Index">Back to List</a>
     </form>
 </div>
+ *@
+
+            @model Meditrack.Models.Usuario
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - Delete</title>
+    <link rel="stylesheet" href="/css/delete.css" />
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="/" class="navbar-logo">
+                <img src="/images/MediTracklogo.png" alt="MediTrack Logo">
+            </a>
+            <div class="navbar-right">
+                <span class="navbar-username">@User.Identity.Name</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Eliminar Usuario</h1>
+        <h3>¿Estás seguro de que deseas eliminar este usuario?</h3>
+        <div class="details">
+            <h4>Usuario</h4>
+            <hr />
+            <div class="details-grid">
+                <div class="details-item">
+                    <dt>Nombre de usuario:</dt>
+                    <dd>@Html.DisplayFor(model => model.NombreUsuario)</dd>
+                </div>
+                <div class="details-item">
+                    <dt>Contraseña:</dt>
+                    <dd>@Html.DisplayFor(model => model.Contrasena)</dd>
+                </div>
+                <div class="details-item">
+                    <dt>Nombre completo:</dt>
+                    <dd>@Html.DisplayFor(model => model.NombreCompleto)</dd>
+                </div>
+                <div class="details-item">
+                    <dt>Fecha de registro:</dt>
+                    <dd>@Html.DisplayFor(model => model.FechaDeRegistro)</dd>
+                </div>
+                <div class="details-item">
+                    <dt>Estado del usuario:</dt>
+                    <dd>@Html.DisplayFor(model => model.IdEstadoUsuarioNavigation.IdEstadoUsuario)</dd>
+                </div>
+                <div class="details-item">
+                    <dt>Rol:</dt>
+                    <dd>@Html.DisplayFor(model => model.Rol.IdRol)</dd>
+                </div>
+            </div>
+        </div>
+
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="IdUsuario" />
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+            <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
+        </form>
+    </div>
+
+</body>
+</html>

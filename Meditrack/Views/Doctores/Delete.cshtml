@@ -1,4 +1,4 @@
-﻿@model Meditrack.Models.Doctore
+﻿@* @model Meditrack.Models.Doctore
 
 @{
     Layout = null;
@@ -68,5 +68,83 @@
         <a asp-action="Index">Back to List</a>
     </form>
 </div>
+</body>
+</html>
+ *@
+
+
+@model Meditrack.Models.Doctore
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - Delete</title>
+    <link rel="stylesheet" href="/css/delete.css" />
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="/" class="navbar-logo">
+                <img src="/images/MediTracklogo.png" alt="MediTrack Logo">
+            </a>
+            <div class="navbar-right">
+                <span class="navbar-username">@User.Identity.Name</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Eliminar Doctor</h1>
+        <h3>¿Estás seguro de que deseas eliminar este doctor?</h3>
+        <div class="details">
+            <h4>Doctor</h4>
+            <hr />
+            <div class="details-grid">
+                <div class="details-item">
+                    <dt>Nombre del doctor:</dt>
+                    <dd>@Html.DisplayFor(model => model.NombreDoctor)</dd>
+                </div>
+                <div class="details-item">
+                    <dt>Teléfono:</dt>
+                    <dd>@Html.DisplayFor(model => model.TelefonoDoctor)</dd>
+                </div>
+                <div class="details-item">
+                    <dt>Edad:</dt>
+                    <dd>@Html.DisplayFor(model => model.EdadDoctor)</dd>
+                </div>
+                <div class="details-item">
+                    <dt>Nacionalidad:</dt>
+                    <dd>@Html.DisplayFor(model => model.NacionalidadDoctor)</dd>
+                </div>
+                <div class="details-item">
+                    <dt>Identificación:</dt>
+                    <dd>@Html.DisplayFor(model => model.IdentificacionDoctor)</dd>
+                </div>
+                <div class="details-item">
+                    <dt>Sexo:</dt>
+                    <dd>@Html.DisplayFor(model => model.SexoDoctor)</dd>
+                </div>
+                <div class="details-item">
+                    <dt>Especialidad:</dt>
+                    <dd>@Html.DisplayFor(model => model.Especialidad)</dd>
+                </div>
+            </div>
+        </div>
+
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="IdDoctor" />
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+            <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
+        </form>
+    </div>
+
 </body>
 </html>

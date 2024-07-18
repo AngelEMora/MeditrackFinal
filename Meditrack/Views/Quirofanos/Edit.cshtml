@@ -1,4 +1,4 @@
-﻿@model Meditrack.Models.Quirofano
+﻿@* @model Meditrack.Models.Quirofano
 
 @{
     Layout = null;
@@ -46,6 +46,93 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+
+</body>
+</html>
+ *@
+
+                @model Meditrack.Models.Quirofano
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Editar</title>
+    <link rel="stylesheet" href="/css/edit.css" />
+    <!-- Agrega aquí tus estilos adicionales si es necesario -->
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="/" class="navbar-logo">
+                <img src="/images/MediTracklogo.png" alt="MediTrack Logo">
+            </a>
+            <div class="navbar-right">
+                <span class="navbar-username">@User.Identity.Name</span>
+                <a asp-action="Index" class="navbar-logout">Salir</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h2>Editando Quirofano</h2>
+
+        <form asp-action="Edit" method="post" class="form">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdQuirofano" />
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label asp-for="NombreQuirofano" class="control-label">Nombre del Quirofano</label>
+                    <input asp-for="NombreQuirofano" class="box" />
+                    <span asp-validation-for="NombreQuirofano" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Ubicacion" class="control-label">Ubicación</label>
+                    <input asp-for="Ubicacion" class="box" />
+                    <span asp-validation-for="Ubicacion" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="EstadoQuirofano" class="control-label">Estado</label>
+                    <select asp-for="EstadoQuirofano" class="box" asp-items="ViewBag.EstadoQuirofano">
+                    </select>
+                    <span asp-validation-for="EstadoQuirofano" class="text-danger"></span>
+                </div>
+            </div>
+
+            <button type="submit" class="submit">Guardar</button>
+        </form>
+
+        <div class="info">
+            <img src="/images/MediTracklogo.png" class="img-1" alt="MediTrack Logo">
+            <div class="location">
+                <div class="icons">
+                    <ion-icon name="location-outline" class="icono"></ion-icon>
+                    <p>Carretera Mella No. 1 en la ciudad de San Pedro de Macorís, RD.</p>
+                </div>
+                <div class="icons">
+                    <ion-icon name="call-outline" class="icono"></ion-icon>
+                    <p>809-529-7022</p>
+                </div>
+                <div class="icons">
+                    <ion-icon name="mail-outline" class="icono"></ion-icon>
+                    <p>hospitaldr.antoniomusa@hotmail.com</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
 </body>
 </html>

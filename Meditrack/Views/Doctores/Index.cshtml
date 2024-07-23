@@ -43,6 +43,7 @@
                     <th>Identificación</th>
                     <th>Sexo</th>
                     <th>Especialidad</th>
+                    <th>Fecha de nacimiento</th>
                     <th></th>
                 </tr>
             </thead>
@@ -70,6 +71,9 @@
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Especialidad)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FechaNacimiento)
                         </td>
                         <td>
                             <a asp-action="Edit" asp-route-id="@item.IdDoctor">Edit</a> |

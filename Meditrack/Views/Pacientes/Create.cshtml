@@ -126,7 +126,7 @@
 
             <div class="form-group">
                 <label asp-for="FechaNacimiento" class="control-label">Fecha de Nacimiento</label>
-                <input asp-for="FechaNacimiento" type="date" class="box" />
+                    <input asp-for="FechaNacimiento" type="date" class="box" id="fechaNacimiento" />
                 <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
             </div>
 
@@ -144,7 +144,7 @@
         <div class="form-row">
             <div class="form-group">
                 <label asp-for="EdadPaciente" class="control-label">Edad</label>
-                <input asp-for="EdadPaciente" type="number" class="box" />
+                    <input asp-for="EdadPaciente" type="number" class="box" id="edadPaciente" readonly />
                 <span asp-validation-for="EdadPaciente" class="text-danger"></span>
             </div>
 
@@ -224,6 +224,27 @@
 
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            function calcularEdad() {
+                var fechaNacimiento = new Date($('#fechaNacimiento').val());
+                var hoy = new Date();
+                var edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+                var mes = hoy.getMonth() - fechaNacimiento.getMonth();
+                if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNacimiento.getDate())) {
+                    edad--;
+                }
+                $('#edadPaciente').val(edad);
+            }
+
+            $('#fechaNacimiento').on('change', calcularEdad);
+
+            $('form').on('submit', function () {
+                calcularEdad();
+            });
+        });
+    </script>
 
 </body>
 </html>

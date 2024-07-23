@@ -108,6 +108,16 @@ namespace Meditrack.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdPaciente,NombrePaciente,FechaNacimiento,SexoPaciente,EdadPaciente,IdentificacionPaciente,NacionalidadPaciente,TelefonoPaciente,TipoSanguineo,SeguroMedico,HistorialMedico")] Paciente paciente)
         {
+
+            if (paciente.FechaNacimiento.HasValue)
+            {
+                var today = DateTime.Today;
+                var birthDate = paciente.FechaNacimiento.Value;
+                var age = today.Year - birthDate.Year;
+                if (birthDate.Date > today.AddYears(-age)) age--;
+                paciente.EdadPaciente = age;
+            }
+
             if (ModelState.IsValid)
             {
                 _context.Add(paciente);
@@ -199,6 +209,15 @@ namespace Meditrack.Controllers
             if (id != paciente.IdPaciente)
             {
                 return NotFound();
+            }
+
+            if (paciente.FechaNacimiento.HasValue)
+            {
+                var today = DateTime.Today;
+                var birthDate = paciente.FechaNacimiento.Value;
+                var age = today.Year - birthDate.Year;
+                if (birthDate.Date > today.AddYears(-age)) age--;
+                paciente.EdadPaciente = age;
             }
 
             if (ModelState.IsValid)

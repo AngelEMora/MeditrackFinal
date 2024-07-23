@@ -13,5 +13,6 @@ namespace Meditrack.Models
         public string IdentificacionDoctor { get; set; } = null!;
         public string? SexoDoctor { get; set; }
         public string Especialidad { get; set; } = null!;
+        public DateTime? FechaNacimiento { get; set; }
     }
 }

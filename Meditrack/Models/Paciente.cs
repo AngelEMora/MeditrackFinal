@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Meditrack.Validation;
 using System.ComponentModel.DataAnnotations;
@@ -19,7 +18,6 @@ namespace Meditrack.Models
         [Required(ErrorMessage = "El sexo del paciente es requerido")]
         public string? SexoPaciente { get; set; } = null!;
 
-        [Required(ErrorMessage = "La edad del paciente es requerida")]
         public int? EdadPaciente { get; set; } = null!;
 
         public string? IdentificacionPaciente { get; set; }
@@ -30,7 +28,7 @@ namespace Meditrack.Models
 
         [Required(ErrorMessage = "El tipo sanguineo del paciente es requerido")]
         public string? TipoSanguineo { get; set; } = null!;
-        public string? SeguroMedico { get; set; } 
+        public string? SeguroMedico { get; set; }
         public string? HistorialMedico { get; set; }
     }
 }

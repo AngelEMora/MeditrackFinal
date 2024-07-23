@@ -29,8 +29,8 @@ namespace Meditrack.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-  //              optionsBuilder.UseSqlServer("Server=LAPTOP-S0US5BOR\\MSSQLSERVER01;Database=Meditrack;Trusted_Connection=True;");
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("Server=LAPTOP-S0US5BOR\\MSSQLSERVER01;Database=Meditrack;Trusted_Connection=True;");
             }
         }
 
@@ -49,6 +49,8 @@ namespace Meditrack.Models
                 entity.Property(e => e.Especialidad)
                     .HasMaxLength(50)
                     .IsUnicode(false);
+
+                entity.Property(e => e.FechaNacimiento).HasColumnType("date");
 
                 entity.Property(e => e.IdentificacionDoctor)
                     .HasMaxLength(50)
@@ -182,7 +184,7 @@ namespace Meditrack.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.TipoSanguineo)
-                    .HasMaxLength(1)
+                    .HasMaxLength(5)
                     .IsUnicode(false)
                     .IsFixedLength();
             });

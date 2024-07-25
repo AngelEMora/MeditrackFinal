@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Meditrack.Models.MaterialesQuirurgico>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NombreMaterial)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movimiento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CantidadDisponibleMaterialQuirurgico)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdTipoMaterialQuirurgicoNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreMaterial)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Movimiento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CantidadDisponibleMaterialQuirurgico)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdTipoMaterialQuirurgicoNavigation.IdTipoMaterialQuirurgico)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdMaterial">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdMaterial">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdMaterial">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</body>
+</html>

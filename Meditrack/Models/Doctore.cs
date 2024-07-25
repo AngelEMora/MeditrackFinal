@@ -26,7 +26,8 @@ namespace Meditrack.Models
         [Required(ErrorMessage = "La especialidad del doctor es requerida")]
         public string Especialidad { get; set; } = null!;
 
-        [Required(ErrorMessage = "La fecha de nacimiento del doctor es requerida")]
+        [ValidacionFechaNacimiento(ErrorMessage = "La fecha de nacimiento no puede ser superior a la actual")]
+        //[Required(ErrorMessage = "La fecha de nacimiento del doctor es requerida")]
         public DateTime? FechaNacimiento { get; set; }
     }
 }

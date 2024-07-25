@@ -20,10 +20,15 @@ namespace Meditrack.Models
 
         public int? EdadPaciente { get; set; } = null!;
 
+        [Required(ErrorMessage = "La identificacion es requerida")]
+        [RegularExpression(@"^\d{3}-\d{7}-\d{1}$", ErrorMessage = "La identificación debe tener el formato xxx-xxxxxxx-x.")]
         public string? IdentificacionPaciente { get; set; }
 
         [Required(ErrorMessage = "La nacionalidad del paciente es requerida")]
         public string? NacionalidadPaciente { get; set; } = null!;
+
+        [Required(ErrorMessage = "El telefono del paciente es requerido")]
+        [RegularExpression(@"^\(\d{3}\) \d{3}-\d{4}$", ErrorMessage = "El formato del número de teléfono es incorrecto. Debe ser de 10 dígitos.")]
         public string? TelefonoPaciente { get; set; }
 
         [Required(ErrorMessage = "El tipo sanguineo del paciente es requerido")]

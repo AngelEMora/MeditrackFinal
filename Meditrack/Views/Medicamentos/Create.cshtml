@@ -43,53 +43,45 @@
             <div class="form-row">
                 <div class="form-group">
                     <label asp-for="NombreMedicamento" class="control-label">Nombre del medicamento</label>
-                    <input asp-for="NombreMedicamento" class="form-control" />
+                    <input asp-for="NombreMedicamento" class="box" />
                     <span asp-validation-for="NombreMedicamento" class="text-danger"></span>
                 </div>
 
                 <div class="form-group">
                     <label asp-for="TipoMedicamento" class="control-label">Tipo de medicamento</label>
-                    <input asp-for="TipoMedicamento" class="form-control" />
+                    <input asp-for="TipoMedicamento" class="box" />
                     <span asp-validation-for="TipoMedicamento" class="text-danger"></span>
                 </div>
 
                 <div class="form-group">
-                    <label asp-for="CantidadDisponibleMedicamentos" class="control-label">Cantidad Disponible Medicamentos</label>
-                <input asp-for="CantidadDisponibleMedicamentos" class="form-control" />
-                <span asp-validation-for="CantidadDisponibleMedicamentos" class="text-danger"></span>
+                    <label asp-for="CantidadDisponible" class="control-label">Cantidad Disponible</label>
+                    <input asp-for="CantidadDisponible" class="box" type="number" min="0" id="cantidadDisponible" />
+                    <span asp-validation-for="CantidadDisponible" class="text-danger"></span>
                 </div>
+                
             </div>
 
             <div class="form-row">
-                <div class="form-group">
-                    <label asp-for="CantidadDisponible" class="control-label">Cantidad Disponible</label>
-                <input asp-for="CantidadDisponible" class="form-control" />
-                    <span asp-validation-for="CantidadDisponible" class="text-danger"></span>
-                </div>
+                
 
                 <div class="form-group">
                     <label asp-for="FechaVencimiento" class="control-label">Fecha de Vencimiento Lote</label>
-                    <input asp-for="FechaVencimiento" class="form-control" />
+                    <input asp-for="FechaVencimiento" class="box" />
                     <span asp-validation-for="FechaVencimiento" class="text-danger"></span>
                 </div>
 
                 <div class="form-group">
                     <label asp-for="Distribuidor" class="control-label"></label>
-                    <input asp-for="Distribuidor" class="form-control" />
+                    <input asp-for="Distribuidor" class="box" />
                     <span asp-validation-for="Distribuidor" class="text-danger"></span>
                 </div>
-            </div>
 
-            <div class="form-row">
                 <div class="form-group">
                     <label asp-for="PuntosReorden" class="control-label">Punto de Reorden</label>
-                    <input asp-for="PuntosReorden" class="form-control" />
+                    <input asp-for="PuntosReorden" class="box" type="number" min="0" id="puntosReorden" />
                     <span asp-validation-for="PuntosReorden" class="text-danger"></span>
                 </div>
-
-                
             </div>
-
             
 
             <input type="submit" value="Enviar" class="submit">
@@ -116,6 +108,16 @@
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('input[type="number"]').on('input', function () {
+                if ($(this).val() < 0) {
+                    $(this).val(0);
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>

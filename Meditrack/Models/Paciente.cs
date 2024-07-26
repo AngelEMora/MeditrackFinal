@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Meditrack.Validation;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Meditrack.Models
 {
@@ -26,6 +28,8 @@ namespace Meditrack.Models
         [Required(ErrorMessage = "El telefono del paciente es requerido")]
         [RegularExpression(@"^\(\d{3}\) \d{3}-\d{4}$", ErrorMessage = "El formato del número de teléfono es incorrecto. Debe ser de 10 dígitos.")]
         public string? TelefonoPaciente { get; set; }
+
+        [Required(ErrorMessage = "El tipo sanguineo del paciente es requerido")]
         public string? TipoSanguineo { get; set; }
         public string? SeguroMedico { get; set; }
         public string? HistorialMedico { get; set; }

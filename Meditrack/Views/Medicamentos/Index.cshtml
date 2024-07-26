@@ -20,7 +20,7 @@
         </div>
         <div class="user-info">
             <span>@User.Identity.Name</span>
-            <img src="/images/AtrasLogo.png" alt="Salir" onclick="location.href='@Url.Action("Logout", "Account")'" />
+            <img src="/images/AtrasLogo.png" alt="Salir" onclick="location.href='@Url.Action("Principal", "Inicio")'" />
         </div>
     </nav>
 
@@ -39,8 +39,6 @@
                     <th>Nombre</th>
                     <th>Tipo</th>
                     <th>Cantidad Disponible</th>
-                    <th>Movimiento</th>
-                    <th>Cantidad Total</th>
                     <th>Fecha de Vencimiento</th>
                     <th>Distribuidor</th>
                     <th>Puntos de Reorden</th>
@@ -56,12 +54,6 @@
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.TipoMedicamento)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CantidadDisponibleMedicamentos)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Movimiento)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.CantidadDisponible)

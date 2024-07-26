@@ -50,7 +50,7 @@
 
                 <div class="form-group">
                     <label asp-for="EdadDoctor" class="control-label">Edad</label>
-                    <input asp-for="EdadDoctor" type="number" class="box" id="edadPaciente" readonly />
+                    <input asp-for="EdadDoctor" type="number" class="box" id="edadDoctor" readonly />
                     <span asp-validation-for="EdadDoctor" class="text-danger"></span>
                 </div>
             </div>
@@ -128,7 +128,7 @@
                 if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNacimiento.getDate())) {
                     edad--;
                 }
-                $('#edadPaciente').val(edad);
+                $('#edadDoctor').val(edad);
             }
 
             $('#fechaNacimiento').on('change', calcularEdad);

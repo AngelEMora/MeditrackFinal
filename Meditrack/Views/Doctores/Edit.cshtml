@@ -13,6 +13,7 @@
     <title>@ViewData["Title"] - Editar </title>
     <link rel="stylesheet" href="/css/edit.css" />
     <!-- Agrega aquí tus estilos adicionales si es necesario -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 
@@ -50,7 +51,7 @@
 
                 <div class="form-group">
                     <label asp-for="EdadDoctor" class="control-label">Edad</label>
-                    <input asp-for="EdadDoctor" class="box" id="edadPaciente" readonly />
+                    <input asp-for="EdadDoctor" type="number" class="box" id="edadDoctor" readonly />
                     <span asp-validation-for="EdadDoctor" class="text-danger"></span>
                 </div>
             </div>
@@ -80,14 +81,13 @@
             <div class="form-row">
                 <div class="form-group">
                     <label asp-for="FechaNacimiento" class="control-label">Fecha de Nacimiento</label>
-                    <input asp-for="FechaNacimiento" class="box" id="fechaNacimiento" />
+                    <input asp-for="FechaNacimiento" type="date" class="box" id="fechaNacimiento" />
                     <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
                 </div>
             </div>
 
             <button type="submit" class="submit">Guardar</button>
         </form>
-
         <div class="info">
             <img src="/images/MediTracklogo.png" class="img-1" alt="MediTrack Logo">
             <div class="location">
@@ -108,6 +108,27 @@
     </div>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            function calcularEdad() {
+                var fechaNacimiento = new Date($('#fechaNacimiento').val());
+                var hoy = new Date();
+                var edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+                var mes = hoy.getMonth() - fechaNacimiento.getMonth();
+                if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNacimiento.getDate())) {
+                    edad--;
+                }
+                $('#edadDoctor').val(edad);
+            }
+
+            $('#fechaNacimiento').on('change', calcularEdad);
+
+            $('form').on('submit', function () {
+                calcularEdad();
+            });
+        });
+    </script>
 
 </body>
 </html>

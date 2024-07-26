@@ -19,10 +19,13 @@ namespace Meditrack.Models
         public virtual DbSet<Doctore> Doctores { get; set; } = null!;
         public virtual DbSet<EstadoQuirofano> EstadoQuirofanos { get; set; } = null!;
         public virtual DbSet<EstadoUsuario> EstadoUsuarios { get; set; } = null!;
+        public virtual DbSet<EstadosdelosMaterialesQuirurgico> EstadosdelosMaterialesQuirurgicos { get; set; } = null!;
+        public virtual DbSet<MaterialesQuirurgico> MaterialesQuirurgicos { get; set; } = null!;
         public virtual DbSet<Medicamento> Medicamentos { get; set; } = null!;
         public virtual DbSet<Paciente> Pacientes { get; set; } = null!;
         public virtual DbSet<Quirofano> Quirofanos { get; set; } = null!;
         public virtual DbSet<Role> Roles { get; set; } = null!;
+        public virtual DbSet<TipodeMaterialQuirurgico> TipodeMaterialQuirurgicos { get; set; } = null!;
         public virtual DbSet<Usuario> Usuarios { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -30,7 +33,7 @@ namespace Meditrack.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=LAPTOP-S0US5BOR\\MSSQLSERVER01;Database=Meditrack;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=.;Database=Meditrack;Trusted_Connection=True;");
             }
         }
 
@@ -39,9 +42,9 @@ namespace Meditrack.Models
             modelBuilder.Entity<Doctore>(entity =>
             {
                 entity.HasKey(e => e.IdDoctor)
-                    .HasName("PK__Doctores__3246951CD27539D8");
+                    .HasName("PK__Doctores__3246951CB517F06E");
 
-                entity.HasIndex(e => e.IdentificacionDoctor, "UQ__Doctores__6C1F6B4221F03C51")
+                entity.HasIndex(e => e.IdentificacionDoctor, "UQ__Doctores__6C1F6B42DD783C03")
                     .IsUnique();
 
                 entity.Property(e => e.IdDoctor).HasColumnName("ID_Doctor");
@@ -77,7 +80,7 @@ namespace Meditrack.Models
             modelBuilder.Entity<EstadoQuirofano>(entity =>
             {
                 entity.HasKey(e => e.IdEstado)
-                    .HasName("PK__EstadoQu__9CF49395DF1BD5D7");
+                    .HasName("PK__EstadoQu__9CF49395D211D643");
 
                 entity.ToTable("EstadoQuirofano");
 
@@ -97,7 +100,7 @@ namespace Meditrack.Models
             modelBuilder.Entity<EstadoUsuario>(entity =>
             {
                 entity.HasKey(e => e.IdEstadoUsuario)
-                    .HasName("PK__EstadoUs__2498C345ABFC02E4");
+                    .HasName("PK__EstadoUs__2498C345C73207A8");
 
                 entity.ToTable("EstadoUsuario");
 
@@ -125,10 +128,45 @@ namespace Meditrack.Models
                     .HasDefaultValueSql("(getdate())");
             });
 
+            modelBuilder.Entity<EstadosdelosMaterialesQuirurgico>(entity =>
+            {
+                entity.HasKey(e => e.IdEstadoMaterialQuirurico)
+                    .HasName("PK_ID_Estado_Material_Quirurico");
+
+                entity.Property(e => e.IdEstadoMaterialQuirurico).HasColumnName("ID_Estado_Material_Quirurico");
+
+                entity.Property(e => e.NombreEstadoMaterialQuirurgico)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<MaterialesQuirurgico>(entity =>
+            {
+                entity.HasKey(e => e.IdMaterial)
+                    .HasName("PK_ID_Material");
+
+                entity.Property(e => e.IdMaterial).HasColumnName("ID_Material");
+
+                entity.Property(e => e.Descripcion)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.IdTipoMaterialQuirurgico).HasColumnName("ID_Tipo_Material_Quirurgico");
+
+                entity.Property(e => e.NombreMaterial)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.IdTipoMaterialQuirurgicoNavigation)
+                    .WithMany(p => p.MaterialesQuirurgicos)
+                    .HasForeignKey(d => d.IdTipoMaterialQuirurgico)
+                    .HasConstraintName("FK_ID_Tipo_Material_Quirurgico_TipodeMaterialQuirurgico");
+            });
+
             modelBuilder.Entity<Medicamento>(entity =>
             {
                 entity.HasKey(e => e.IdMedicamento)
-                    .HasName("PK__Medicame__C1C5A04279ADD9B6");
+                    .HasName("PK__Medicame__C1C5A04211AB6781");
 
                 entity.Property(e => e.IdMedicamento).HasColumnName("ID_Medicamento");
 
@@ -150,7 +188,7 @@ namespace Meditrack.Models
             modelBuilder.Entity<Paciente>(entity =>
             {
                 entity.HasKey(e => e.IdPaciente)
-                    .HasName("PK__Paciente__5F36506170339A50");
+                    .HasName("PK__Paciente__5F365061743D905F");
 
                 entity.Property(e => e.IdPaciente).HasColumnName("ID_Paciente");
 
@@ -192,7 +230,7 @@ namespace Meditrack.Models
             modelBuilder.Entity<Quirofano>(entity =>
             {
                 entity.HasKey(e => e.IdQuirofano)
-                    .HasName("PK__Quirofan__44526D2266504D3A");
+                    .HasName("PK__Quirofan__44526D22D68D1ADB");
 
                 entity.Property(e => e.IdQuirofano).HasColumnName("ID_Quirofano");
 
@@ -215,13 +253,13 @@ namespace Meditrack.Models
                 entity.HasOne(d => d.EstadoQuirofanoNavigation)
                     .WithMany(p => p.Quirofanos)
                     .HasForeignKey(d => d.EstadoQuirofano)
-                    .HasConstraintName("FK__Quirofano__Estad__5812160E");
+                    .HasConstraintName("FK__Quirofano__Estad__3B75D760");
             });
 
             modelBuilder.Entity<Role>(entity =>
             {
                 entity.HasKey(e => e.IdRol)
-                    .HasName("PK__Roles__202AD220B5D1DF9D");
+                    .HasName("PK__Roles__202AD220B5517A99");
 
                 entity.HasIndex(e => e.Nombre, "idx_nombre")
                     .IsUnique();
@@ -244,10 +282,33 @@ namespace Meditrack.Models
                     .IsUnicode(false);
             });
 
+            modelBuilder.Entity<TipodeMaterialQuirurgico>(entity =>
+            {
+                entity.HasKey(e => e.IdTipoMaterialQuirurgico)
+                    .HasName("PK_ID_Tipo_Material_Quirurgico");
+
+                entity.ToTable("TipodeMaterialQuirurgico");
+
+                entity.Property(e => e.IdTipoMaterialQuirurgico).HasColumnName("ID_Tipo_Material_Quirurgico");
+
+                entity.Property(e => e.DescripcionTipoMaterialQuirurgico)
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.NombreTipoMaterialQuirurgico)
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.EstadoMaterialNavigation)
+                    .WithMany(p => p.TipodeMaterialQuirurgicos)
+                    .HasForeignKey(d => d.EstadoMaterial)
+                    .HasConstraintName("FK_EstadoMaterial_EstadosdelosMaterialesQuirurgicos");
+            });
+
             modelBuilder.Entity<Usuario>(entity =>
             {
                 entity.HasKey(e => e.IdUsuario)
-                    .HasName("PK__Usuario__DE4431C58526414B");
+                    .HasName("PK__Usuario__DE4431C546ADFCE4");
 
                 entity.ToTable("Usuario");
 
@@ -280,7 +341,7 @@ namespace Meditrack.Models
                 entity.HasOne(d => d.IdEstadoUsuarioNavigation)
                     .WithMany(p => p.Usuarios)
                     .HasForeignKey(d => d.IdEstadoUsuario)
-                    .HasConstraintName("FK__Usuario__ID_Esta__35BCFE0A");
+                    .HasConstraintName("FK__Usuario__ID_Esta__3C69FB99");
 
                 entity.HasOne(d => d.NombreRolNavigation)
                     .WithMany(p => p.UsuarioNombreRolNavigations)
@@ -291,7 +352,7 @@ namespace Meditrack.Models
                 entity.HasOne(d => d.Rol)
                     .WithMany(p => p.UsuarioRols)
                     .HasForeignKey(d => d.RolId)
-                    .HasConstraintName("FK__Usuario__RolId__34C8D9D1");
+                    .HasConstraintName("FK__Usuario__RolId__3D5E1FD2");
             });
 
             OnModelCreatingPartial(modelBuilder);

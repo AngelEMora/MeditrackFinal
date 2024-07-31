@@ -1,5 +1,4 @@
-﻿using Meditrack.Validation;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Meditrack.Models
@@ -14,9 +13,6 @@ namespace Meditrack.Models
         public string IdentificacionDoctor { get; set; } = null!;
         public string? SexoDoctor { get; set; }
         public string Especialidad { get; set; } = null!;
-
-        [ValidacionFechaNacimiento(ErrorMessage = "La fecha de nacimiento no puede ser superior a la actual")]
-        //[Required(ErrorMessage = "La fecha de nacimiento del doctor es requerida")]
         public DateTime? FechaNacimiento { get; set; }
     }
 }

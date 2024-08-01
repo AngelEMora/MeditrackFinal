@@ -52,6 +52,11 @@ namespace Meditrack.Controllers
             return View();
         }
 
+        public IActionResult Configuracion()
+        {
+            return View();
+        }
+
         [HttpPost]
         public async Task<IActionResult> IniciarSesion(string nombreusuario, string contrasena)
         {

@@ -1,0 +1,79 @@
+﻿@{
+    Layout = null;
+    ViewData["Title"] = "Index";
+}
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuracion</title>
+    <link rel="stylesheet" href="./css/principal.css">
+
+
+    <link href="~/css/principal.css" rel="stylesheet" media="all" />
+</head>
+<body>
+
+    <div class="navbar">
+        <div class="navbar-left">
+            <img src="/images/MediTracklogo.png" alt="Logo de la página" class="navbar-logo">
+            <span class="navbar-user">@User.Identity.Name</span>
+        </div>
+        <div class="navbar-right">
+            <a href="@Url.Action("Principal", "Inicio")" class="navbar-item">Atras</a>
+
+
+        </div>
+    </div>
+
+
+    <h1 style="width: 100%;
+        color: #196087;
+        margin-bottom:20px;
+        text-align: center;
+        ">
+        Configuraciones
+    </h1>
+
+    <div class="menu">
+        <a href="" class="menu-item">
+            <img src="/images/TipoMedicamento.jpg" alt="TipoMedicamento">
+            <p>Tipo de medicamento</p>
+        </a>
+
+        <a href="" class="menu-item">
+            <img src="/images/kitsMedicamentos.jpg" alt="kitsMedicameto">
+            <p>Kits de medicametos</p>
+        </a>
+
+        <a href="" class="menu-item">
+            <img src="/images/tiposMateriales.jpg" alt="TipoMaterialQuirurgico">
+            <p>Tipo de material quirurgico</p>
+        </a>
+
+        <a href="" class="menu-item">
+            <img src="/images/kitsMateriales.jpg" alt="kitsMaterialQuirurgico">
+            <p>Kits de materiales quirurgico</p>
+        </a>
+
+        <a href="" class="menu-item">
+            <img src="/images/EstadoQuirofano.jpg" alt="EstadoQuirofano">
+            <p>Estado del quirofano</p>
+        </a>
+
+        <a href="" class="menu-item">
+            <img src="/images/EstadosMaterial.jpg" alt="EstadoMaterial">
+            <p>Estado del Material Quirurgico</p>
+        </a>
+
+
+    </div>
+    <script src="principal.js"></script>
+</body>
+
+
+
+</html>

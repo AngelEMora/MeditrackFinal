@@ -1,67 +1,92 @@
 ﻿@model IEnumerable<Meditrack.Models.MaterialesQuirurgico>
 
 @{
+    ViewData["Title"] = "Index";
     Layout = null;
 }
 
 <!DOCTYPE html>
-
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Meditrack</title>
+    <link rel="stylesheet" href="/css/listas.css" />
 </head>
 <body>
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.NombreMaterial)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Descripcion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Movimiento)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CantidadDisponibleMaterialQuirurgico)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdTipoMaterialQuirurgicoNavigation)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NombreMaterial)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descripcion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Movimiento)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CantidadDisponibleMaterialQuirurgico)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdTipoMaterialQuirurgicoNavigation.IdTipoMaterialQuirurgico)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdMaterial">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdMaterial">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdMaterial">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="/images/MediTracklogo.png" alt="Logo" />
+            <span>Meditrack</span>
+        </div>
+        <div class="user-info">
+            <span>
+                <ion-icon name="person-sharp"></ion-icon>
+                @User.Identity.Name
+            </span>
+            <a href="@Url.Action("Principal", "Inicio")" class="navbar-item">
+                <ion-icon name="arrow-back-sharp"></ion-icon>
+                Atras
+            </a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Lista de Materiales Quirúrgicos</h1>
+        <div class="action-buttons">
+            <form asp-action="Index" method="get" class="search-bar">
+                <input type="text" name="searchString" value="@ViewBag.SearchString" placeholder="Buscar" />
+                <button type="submit">
+                    <ion-icon name="search-sharp"></ion-icon>
+                </button>
+            </form>
+            <form asp-action="Create" method="get" style="display: inline;">
+                <button type="submit" class="btn btn-primary">Agregar material</button>
+            </form>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.First().NombreMaterial)</th>
+                    <th>@Html.DisplayNameFor(model => model.First().Descripcion)</th>
+                    <th>@Html.DisplayNameFor(model => model.First().Movimiento)</th>
+                    <th>@Html.DisplayNameFor(model => model.First().CantidadDisponibleMaterialQuirurgico)</th>
+                    <th>@Html.DisplayNameFor(model => model.First().IdTipoMaterialQuirurgicoNavigation.IdTipoMaterialQuirurgico)</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.NombreMaterial)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Descripcion)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Movimiento)</td>
+                        <td>@Html.DisplayFor(modelItem => item.CantidadDisponibleMaterialQuirurgico)</td>
+                        <td>@Html.DisplayFor(modelItem => item.IdTipoMaterialQuirurgicoNavigation.IdTipoMaterialQuirurgico)</td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.IdMaterial">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.IdMaterial">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.IdMaterial">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="pagination">
+            @{
+                int totalRecords = ViewBag.TotalRecords != null ? (int)ViewBag.TotalRecords : 0;
+                int pageSize = ViewBag.PageSize != null ? (int)ViewBag.PageSize : 1;
+                int totalPages = (int)Math.Ceiling((double)totalRecords / pageSize);
+                for (int i = 1; i <= totalPages; i++)
+                {
+                    <a asp-action="Index" asp-route-pageNumber="@i" class="@(i == ViewBag.PageNumber ? "active" : "")">@i</a>
+                }
+            }
+        </div>
+    </div>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
 </html>

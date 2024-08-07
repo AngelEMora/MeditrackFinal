@@ -1,63 +1,102 @@
 ﻿@model Meditrack.Models.MaterialesQuirurgico
 
 @{
+    ViewData["Title"] = "Edit";
     Layout = null;
 }
 
 <!DOCTYPE html>
-
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Edit</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Editar</title>
+    <link rel="stylesheet" href="/css/edit.css" />
+    <!-- Agrega aquí tus estilos adicionales si es necesario -->
 </head>
 <body>
 
-<h4>MaterialesQuirurgico</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="/" class="navbar-logo">
+                <img src="/images/MediTracklogo.png" alt="MediTrack Logo">
+            </a>
+            <div class="navbar-right">
+                <span class="navbar-user">
+                    <ion-icon name="person-sharp"></ion-icon>
+                    @User.Identity.Name
+                </span>
+                <a asp-action="Index" class="navbar-item">
+                    <ion-icon name="arrow-back-sharp"></ion-icon>
+                    Atrás
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <form asp-action="Edit" method="post" class="form">
+            <h2>Editando Material Quirúrgico</h2>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="IdMaterial" />
-            <div class="form-group">
-                <label asp-for="NombreMaterial" class="control-label"></label>
-                <input asp-for="NombreMaterial" class="form-control" />
-                <span asp-validation-for="NombreMaterial" class="text-danger"></span>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label asp-for="NombreMaterial" class="control-label">Nombre del Material</label>
+                    <input asp-for="NombreMaterial" class="box" />
+                    <span asp-validation-for="NombreMaterial" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Descripcion" class="control-label">Descripción</label>
+                    <input asp-for="Descripcion" class="box" />
+                    <span asp-validation-for="Descripcion" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Movimiento" class="control-label">Movimiento</label>
+                    <input asp-for="Movimiento" class="box" />
+                    <span asp-validation-for="Movimiento" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Descripcion" class="control-label"></label>
-                <input asp-for="Descripcion" class="form-control" />
-                <span asp-validation-for="Descripcion" class="text-danger"></span>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label asp-for="CantidadDisponibleMaterialQuirurgico" class="control-label">Cantidad Disponible</label>
+                    <input asp-for="CantidadDisponibleMaterialQuirurgico" class="box" />
+                    <span asp-validation-for="CantidadDisponibleMaterialQuirurgico" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="IdTipoMaterialQuirurgico" class="control-label">Tipo de Material Quirúrgico</label>
+                    <select asp-for="IdTipoMaterialQuirurgico" class="box" asp-items="ViewBag.IdTipoMaterialQuirurgico"></select>
+                    <span asp-validation-for="IdTipoMaterialQuirurgico" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Movimiento" class="control-label"></label>
-                <input asp-for="Movimiento" class="form-control" />
-                <span asp-validation-for="Movimiento" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CantidadDisponibleMaterialQuirurgico" class="control-label"></label>
-                <input asp-for="CantidadDisponibleMaterialQuirurgico" class="form-control" />
-                <span asp-validation-for="CantidadDisponibleMaterialQuirurgico" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdTipoMaterialQuirurgico" class="control-label"></label>
-                <select asp-for="IdTipoMaterialQuirurgico" class="form-control" asp-items="ViewBag.IdTipoMaterialQuirurgico"></select>
-                <span asp-validation-for="IdTipoMaterialQuirurgico" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
+
+            <button type="submit" class="submit">Guardar</button>
         </form>
+
+        <div class="info">
+            <img src="/images/MediTracklogo.png" class="img-1" alt="MediTrack Logo">
+            <div class="location">
+                <div class="icons">
+                    <ion-icon name="location-outline" class="icono"></ion-icon>
+                    <p>Carretera Mella No. 1 en la ciudad de San Pedro de Macorís, RD.</p>
+                </div>
+                <div class="icons">
+                    <ion-icon name="call-outline" class="icono"></ion-icon>
+                    <p>809-529-7022</p>
+                </div>
+                <div class="icons">
+                    <ion-icon name="mail-outline" class="icono"></ion-icon>
+                    <p>hospitaldr.antoniomusa@hotmail.com</p>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
 </html>

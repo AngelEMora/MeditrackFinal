@@ -1,7 +1,7 @@
-﻿@model IEnumerable<Meditrack.Models.Doctore>
+﻿@model Meditrack.Models.Doctore
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Edit";
     Layout = null;
 }
 
@@ -9,93 +9,133 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>@ViewData["Title"] - Meditrack</title>
-    <link rel="stylesheet" href="/css/listas.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Editar</title>
+    <link rel="stylesheet" href="/css/edit.css" />
+    
 </head>
 <body>
+
     <nav class="navbar">
-        <div class="logo">
-            <img src="/images/MediTracklogo.png" alt="Logo" />
-            <span>Meditrack</span>
-        </div>
-        <div class="user-info">
-            <span>@User.Identity.Name</span>
-            <img src="/images/AtrasLogo.png" alt="Salir" onclick="location.href='@Url.Action("Principal", "Inicio")'" />
+        <div class="navbar-container">
+            <a href="/" class="navbar-logo">
+                <img src="/images/MediTracklogo.png" alt="MediTrack Logo">
+            </a>
+            <div class="navbar-right">
+                <span class="navbar-user">
+                    <ion-icon name="person-sharp"></ion-icon>
+                    @User.Identity.Name
+                </span>
+
+                <a asp-action="Index" class="navbar-item">
+                    <ion-icon name="arrow-back-sharp"></ion-icon>
+                    Atras
+                </a>
+            </div>
         </div>
     </nav>
 
     <div class="container">
-        <h1>Lista de Doctores</h1>
-        <div class="action-buttons">
-            <form asp-action="Index" method="get" class="search-bar">
-                <input type="text" name="searchString" value="@ViewBag.SearchString" placeholder="Buscar" />
-                <button type="submit"><img src="~/images/search" alt="Buscar" /></button>
-            </form>
-            <a asp-action="Create" class="btn btn-primary">Agregar doctor</a>
-        </div>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Teléfono</th>
-                    <th>Edad</th>
-                    <th>Nacionalidad</th>
-                    <th>Identificación</th>
-                    <th>Sexo</th>
-                    <th>Especialidad</th>
-                    <th>Fecha de nacimiento</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.NombreDoctor)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.TelefonoDoctor)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.EdadDoctor)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.NacionalidadDoctor)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.IdentificacionDoctor)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.SexoDoctor)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Especialidad)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.FechaNacimiento)
-                        </td>
-                        <td>
-                            <a asp-action="Edit" asp-route-id="@item.IdDoctor">Edit</a> |
-                            <a asp-action="Details" asp-route-id="@item.IdDoctor">Details</a> |
-                            <a asp-action="Delete" asp-route-id="@item.IdDoctor">Delete</a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-        <div class="pagination">
-            @{
-                int totalRecords = ViewBag.TotalRecords != null ? (int)ViewBag.TotalRecords : 0;
-                int pageSize = ViewBag.PageSize != null ? (int)ViewBag.PageSize : 1;
+        <form asp-action="Edit" method="post" class="form">
+            <h2>Editando Doctor</h2>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdDoctor" />
 
-                int totalPages = (int)Math.Ceiling((double)totalRecords / pageSize);
-                for (int i = 1; i <= totalPages; i++)
-                {
-                    <a asp-action="Index" asp-route-pageNumber="@i" class="@(i == ViewBag.PageNumber ? "active" : "")">@i</a>
-                }
-            }
+            <div class="form-row">
+                <div class="form-group">
+                    <label asp-for="NombreDoctor" class="control-label">Nombre del Doctor</label>
+                    <input asp-for="NombreDoctor" class="box" />
+                    <span asp-validation-for="NombreDoctor" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="TelefonoDoctor" class="control-label">Teléfono</label>
+                    <input asp-for="TelefonoDoctor" class="box" />
+                    <span asp-validation-for="TelefonoDoctor" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="EdadDoctor" class="control-label">Edad</label>
+                    <input asp-for="EdadDoctor" type="number" class="box" id="edadDoctor" readonly />
+                    <span asp-validation-for="EdadDoctor" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label asp-for="NacionalidadDoctor" class="control-label">Nacionalidad</label>
+                    <select asp-for="NacionalidadDoctor" class="box" asp-items="ViewBag.Nacionalidades">
+                    </select>
+                    <span asp-validation-for="NacionalidadDoctor" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="SexoDoctor" class="control-label">Sexo</label>
+                    <select asp-for="SexoDoctor" class="box" asp-items="ViewBag.Sexos">
+                    </select>
+                    <span asp-validation-for="SexoDoctor" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Especialidad" class="control-label">Especialidad</label>
+                    <input asp-for="Especialidad" class="box" />
+                    <span asp-validation-for="Especialidad" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label asp-for="FechaNacimiento" class="control-label">Fecha de Nacimiento</label>
+                    <input asp-for="FechaNacimiento" type="date" class="box" id="fechaNacimiento" />
+                    <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
+                </div>
+            </div>
+
+            <button type="submit" class="submit">Guardar</button>
+        </form>
+
+        <div class="info">
+            <img src="/images/MediTracklogo.png" class="img-1" alt="MediTrack Logo">
+            <div class="location">
+                <div class="icons">
+                    <ion-icon name="location-outline" class="icono"></ion-icon>
+                    <p>Carretera Mella No. 1 en la ciudad de San Pedro de Macorís, RD.</p>
+                </div>
+                <div class="icons">
+                    <ion-icon name="call-outline" class="icono"></ion-icon>
+                    <p>809-529-7022</p>
+                </div>
+                <div class="icons">
+                    <ion-icon name="mail-outline" class="icono"></ion-icon>
+                    <p>hospitaldr.antoniomusa@hotmail.com</p>
+                </div>
+            </div>
         </div>
     </div>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            function calcularEdad() {
+                var fechaNacimiento = new Date($('#fechaNacimiento').val());
+                var hoy = new Date();
+                var edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+                var mes = hoy.getMonth() - fechaNacimiento.getMonth();
+                if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNacimiento.getDate())) {
+                    edad--;
+                }
+                $('#edadDoctor').val(edad);
+            }
+
+            $('#fechaNacimiento').on('change', calcularEdad);
+
+            $('form').on('submit', function () {
+                calcularEdad();
+            });
+        });
+    </script>
+
 </body>
 </html>

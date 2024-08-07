@@ -20,20 +20,33 @@
             <span>Meditrack</span>
         </div>
         <div class="user-info">
-            <span>@User.Identity.Name</span>
-            <img src="/images/AtrasLogo.png" alt="Salir" onclick="location.href='@Url.Action("Principal", "Inicio")'" />
+            <span>
+                <ion-icon name="person-sharp"></ion-icon>
+                 @User.Identity.Name</span>
+
+            <a href="@Url.Action("Principal", "Inicio")" class="navbar-item">
+                <ion-icon name="arrow-back-sharp"></ion-icon>
+                Atras
+            </a>
+            
         </div>
     </nav>
 
     <div class="container">
         <h1>Lista de Pacientes</h1>
         <div class="action-buttons">
-           
+
             <form asp-action="Index" method="get" class="search-bar">
                 <input type="text" name="searchString" value="@ViewBag.SearchString" placeholder="Buscar" />
-                <button type="submit"><img src="~/images/search" alt="Buscar" /></button>
+                <button type="submit">
+                    <ion-icon name="search-sharp"></ion-icon>
+                </button>
             </form>
-            <a asp-action="Create" class="btn btn-primary">Agregar paciente</a>
+
+            <form asp-action="Create" method="get" style="display: inline;">
+                <button type="submit" class="btn btn-primary">Agregar paciente</button>
+            </form>
+            
         </div>
         <table class="table">
             <thead>
@@ -49,7 +62,7 @@
                     <th>Tipo sanguineo</th>
                     <th>Seguro medico</th>
                     <th>Historial medico</th>
-                    <th></th>
+                    <th>Acciones</th>
             
                 </tr>
             </thead>
@@ -106,5 +119,8 @@
             }
         </div>
     </div>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
 </html>

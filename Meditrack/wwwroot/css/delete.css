@@ -37,15 +37,38 @@ body {
 .navbar-right {
     display: flex;
     align-items: center;
-    gap: 20px;
+   /* gap: 20px;*/
 }
 
-.navbar-username {
+.navbar-user {
+    font-size: 18px;
+    margin-left: 50px;
+    color: white;
+}
+
+
+ion-icon {
+    font-size: 15px;
+}
+
+
+.navbar-item {
+    color: white;
+    margin-left: 15px;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+    .navbar-item:hover {
+        text-decoration: underline;
+    }
+
+/*.navbar-username {
     color: #fff;
     font-weight: 500;
-}
+}*/
 
-.navbar-logout {
+/*.navbar-logout {
     background-color: #fff;
     color: var(--primary-color);
     padding: 5px 15px;
@@ -57,7 +80,7 @@ body {
 
     .navbar-logout:hover {
         background-color: #f0f0f0;
-    }
+    }*/
 
 .container {
     max-width: 1000px;

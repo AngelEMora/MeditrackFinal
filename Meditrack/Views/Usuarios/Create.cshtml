@@ -2,104 +2,109 @@
 
 @{
     ViewData["Title"] = "Create";
-    Layout = null; 
+    Layout = null;
 }
 
 <!DOCTYPE html>
 <html>
 <body>
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Crear </title>
-    <link rel="stylesheet" href="/css/create.css" />
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>@ViewData["Title"] - Crear </title>
+        <link rel="stylesheet" href="/css/create.css" />
 
-</head>
+    </head>
 
-<nav class="navbar">
-    <div class="navbar-container">
-        <a href="/" class="navbar-logo">
-            <img src="/images/MediTracklogo.png" alt="MediTrack Logo">
-        </a>
-        <div class="navbar-right">
-            <span class="navbar-username">@User.Identity.Name</span>
-            <a href="/" class="navbar-logout">Salir</a>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="/" class="navbar-logo">
+                <img src="/images/MediTracklogo.png" alt="MediTrack Logo">
+            </a>
+            <div class="navbar-right">
+                <span class="navbar-user">
+                    <ion-icon name="person-sharp"></ion-icon>
+                    @User.Identity.Name
+                </span>
+                <a asp-action="Index" class="navbar-item">
+                    <ion-icon name="arrow-back-sharp"></ion-icon>
+                    Atras
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <form class="form" asp-action="Create">
+            <h2>Usuario</h2>
+            <p>
+                Agradecemos tu dedicación al completar este formulario,
+                que nos ayudará a proporcionar el mejor cuidado posible a
+                nuestros pacientes. La información recopilada será fundamental
+                para comprender mejor las necesidades médicas y garantizar un tratamiento
+                efectivo. Por favor, asegúrate de completar todos los campos
+                requeridos con la información más precisa y actualizada disponible.
+            </p>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label asp-for="NombreUsuario" class="control-label">Nombre del Usuario</label>
+                    <input asp-for="NombreUsuario" class="box" />
+                    <span asp-validation-for="NombreUsuario" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Contrasena" class="control-label">Contraseña</label>
+                    <input asp-for="Contrasena" type="password" class="box" />
+                    <span asp-validation-for="Contrasena" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="NombreCompleto" class="control-label">Nombre Completo</label>
+                    <input asp-for="NombreCompleto" class="box" />
+                    <span asp-validation-for="NombreCompleto" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label asp-for="IdEstadoUsuario" class="control-label">Estado del Usuario</label>
+                    <select asp-for="IdEstadoUsuario" class="box" asp-items="ViewBag.IdEstadoUsuario"></select>
+                    <span asp-validation-for="IdEstadoUsuarioNavigation" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="RolId" class="control-label">Rol</label>
+                    <select asp-for="RolId" class="box" asp-items="ViewBag.RolId"></select>
+                    <span asp-validation-for="Rol" class="text-danger"></span>
+                </div>
+            </div>
+
+            <input type="submit" value="Guardar" class="submit">
+        </form>
+
+        <div class="info">
+            <img src="/images/MediTracklogo.png" class="img-1" alt="MediTrack Logo">
+            <div class="location">
+                <div class="icons">
+                    <ion-icon name="location-outline" class="icono"></ion-icon>
+                    <p>Carretera Mella No. 1 en la ciudad de San Pedro de Macorís, RD.</p>
+                </div>
+                <div class="icons">
+                    <ion-icon name="call-outline" class="icono"></ion-icon>
+                    <p>809-529-7022</p>
+                </div>
+                <div class="icons">
+                    <ion-icon name="mail-outline" class="icono"></ion-icon>
+                    <p>hospitaldr.antoniomusa@hotmail.com</p>
+                </div>
+            </div>
         </div>
     </div>
-</nav>
 
-<div class="container">
-    <form class="form" asp-action="Create">
-        <h2>Usuario</h2>
-        <p>
-           Agradecemos tu dedicación al completar este formulario, 
-            que nos ayudará a proporcionar el mejor cuidado posible a 
-            nuestros pacientes. La información recopilada será fundamental 
-            para comprender mejor las necesidades médicas y garantizar un tratamiento
-            efectivo. Por favor, asegúrate de completar todos los campos 
-            requeridos con la información más precisa y actualizada disponible.
-        </p>
-
-        <div class="form-row">
-            <div class="form-group">
-                <label asp-for="NombreUsuario" class="control-label">Nombre del Usuario</label>
-                <input asp-for="NombreUsuario" class="box" />
-                <span asp-validation-for="NombreUsuario" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Contrasena" class="control-label">Contraseña</label>
-                <input asp-for="Contrasena" type="password" class="box" />
-                <span asp-validation-for="Contrasena" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="NombreCompleto" class="control-label">Nombre Completo</label>
-                <input asp-for="NombreCompleto" class="box" />
-                <span asp-validation-for="NombreCompleto" class="text-danger"></span>
-            </div>
-        </div>
-
-        <div class="form-row">
-            
-
-            <div class="form-group">
-                <label asp-for="IdEstadoUsuario" class="control-label">Estado del Usuario</label>
-                <select asp-for="IdEstadoUsuario" class="form-control" asp-items="ViewBag.IdEstadoUsuario"></select>
-                <span asp-validation-for="IdEstadoUsuarioNavigation" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="RolId" class="control-label">Rol</label>
-                <select asp-for="RolId" class="box" asp-items="ViewBag.RolId"></select>
-                <span asp-validation-for="Rol" class="text-danger"></span>
-            </div>
-        </div>
-
-        <input type="submit" value="Enviar" class="submit">
-    </form>
-
-    <div class="info">
-        <img src="/images/hospitallogo.jpg" class="img-1" alt="MediTrack Logo">
-        <div class="location">
-            <div class="icons">
-                <ion-icon name="location-outline" class="icono"></ion-icon>
-                <p>Carretera Mella No. 1 en la ciudad de San Pedro de Macorís, RD.</p>
-            </div>
-            <div class="icons">
-                <ion-icon name="call-outline" class="icono"></ion-icon>
-                <p>809-529-7022</p>
-            </div>
-            <div class="icons">
-                <ion-icon name="mail-outline" class="icono"></ion-icon>
-                <p>hospitaldr.antoniomusa@hotmail.com</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
 </body>
 </html>
+

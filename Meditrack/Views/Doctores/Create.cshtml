@@ -1,4 +1,4 @@
-﻿@model Meditrack.Models.Doctore
+﻿ @model Meditrack.Models.Doctore
 
 @{
     ViewData["Title"] = "Create";
@@ -6,12 +6,11 @@
 }
 
 <!DOCTYPE html>
-
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Create Doctor</title>
+    <title>@ViewData["Title"] - Crear Doctor</title>
     <link rel="stylesheet" href="/css/create.css" />
 </head>
 <body>
@@ -22,8 +21,14 @@
                 <img src="/images/MediTracklogo.png" alt="MediTrack Logo">
             </a>
             <div class="navbar-right">
-                <span class="navbar-username">@User.Identity.Name</span>
-                <a href="/" class="navbar-logout">Salir</a>
+                <span class="navbar-user">
+                    <ion-icon name="person-sharp"></ion-icon>
+                    @User.Identity.Name
+                </span>
+                <a asp-action="Index" class="navbar-item">
+                    <ion-icon name="arrow-back-sharp"></ion-icon>
+                    Atras
+                </a>
             </div>
         </div>
     </nav>
@@ -83,21 +88,20 @@
                     <input asp-for="Especialidad" class="box" />
                     <span asp-validation-for="Especialidad" class="text-danger"></span>
                 </div>
-            
 
-            <div class="form-group">
-                <label asp-for="FechaNacimiento" class="control-label">Fecha de Nacimiento</label>
-                <input asp-for="FechaNacimiento" class="box" id="fechaNacimiento" />
-                <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
-            </div>
 
+                <div class="form-group">
+                    <label asp-for="FechaNacimiento" class="control-label">Fecha de Nacimiento</label>
+                    <input asp-for="FechaNacimiento" class="box" id="fechaNacimiento" />
+                    <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
+                </div>
             </div>
 
             <input type="submit" value="Enviar" class="submit">
         </form>
 
         <div class="info">
-            <img src="/images/hospitallogo.jpg" class="img-1" alt="MediTrack Logo">
+            <img src="/images/MediTracklogo.png" class="img-1" alt="MediTrack Logo">
             <div class="location">
                 <div class="icons">
                     <ion-icon name="location-outline" class="icono"></ion-icon>

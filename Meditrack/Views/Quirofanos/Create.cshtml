@@ -13,7 +13,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>@ViewData["Title"] - Crear </title>
         <link rel="stylesheet" href="/css/create.css" />
-
     </head>
 
     <nav class="navbar">
@@ -22,8 +21,14 @@
                 <img src="/images/MediTracklogo.png" alt="MediTrack Logo">
             </a>
             <div class="navbar-right">
-                <span class="navbar-username">@User.Identity.Name</span>
-                <a href="/" class="navbar-logout">Salir</a>
+                <span class="navbar-user">
+                    <ion-icon name="person-sharp"></ion-icon>
+                    @User.Identity.Name
+                </span>
+                <a asp-action="Index" class="navbar-item">
+                    <ion-icon name="arrow-back-sharp"></ion-icon>
+                    Atras
+                </a>
             </div>
         </div>
     </nav>
@@ -66,7 +71,7 @@
         </form>
 
         <div class="info">
-            <img src="/images/hospitallogo.jpg" class="img-1" alt="MediTrack Logo">
+            <img src="/images/MediTracklogo.png" class="img-1" alt="MediTrack Logo">
             <div class="location">
                 <div class="icons">
                     <ion-icon name="location-outline" class="icono"></ion-icon>
@@ -86,6 +91,5 @@
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-
 </body>
 </html>

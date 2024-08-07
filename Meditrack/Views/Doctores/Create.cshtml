@@ -89,12 +89,17 @@
                     <span asp-validation-for="Especialidad" class="text-danger"></span>
                 </div>
 
+            <div class="form-group">
+                <label asp-for="FechaNacimiento" class="control-label">Fecha de Nacimiento</label>
+                    <input asp-for="FechaNacimiento" class="box" type="date" id="fechaNacimiento" />
+                <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
+            </div>
 
-                <div class="form-group">
+                @* <div class="form-group">
                     <label asp-for="FechaNacimiento" class="control-label">Fecha de Nacimiento</label>
                     <input asp-for="FechaNacimiento" class="box" id="fechaNacimiento" />
                     <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
-                </div>
+                </div> *@
             </div>
 
             <input type="submit" value="Enviar" class="submit">

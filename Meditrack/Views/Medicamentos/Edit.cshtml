@@ -126,7 +126,7 @@
             <div class="form-row">
                 <div class="form-group">
                     <label asp-for="FechaVencimiento" class="control-label">Fecha de Vencimiento</label>
-                    <input asp-for="FechaVencimiento" type="date" class="box" />
+                    <input asp-for="FechaVencimiento" type="date" class="box" type="date" id="fechaVencimiento" min="@DateTime.Now.ToString("yyyy-MM-dd")" />
                     <span asp-validation-for="FechaVencimiento" class="text-danger"></span>
                 </div>
             
@@ -178,6 +178,23 @@
             });
         });
     </script>
+
+    <script>
+    $(document).ready(function () {
+        $('#fechaVencimiento').attr('min', new Date().toISOString().split('T')[0]);
+
+        $('form').on('submit', function () {
+            var fechaVencimiento = new Date($('#fechaVencimiento').val());
+            var hoy = new Date();
+            hoy.setHours(0, 0, 0, 0);
+
+            if (fechaVencimiento < hoy) {
+                alert('La fecha de vencimiento debe ser una fecha futura.');
+                return false;
+            }
+        });
+    });
+</script>
 
 </body>
 </html>

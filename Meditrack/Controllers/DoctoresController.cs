@@ -112,14 +112,42 @@ namespace Meditrack.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdDoctor,NombreDoctor,TelefonoDoctor,EdadDoctor,NacionalidadDoctor,IdentificacionDoctor,SexoDoctor,Especialidad")] Doctore doctore)
+        public async Task<IActionResult> Create([Bind("IdDoctor,NombreDoctor,TelefonoDoctor,EdadDoctor,NacionalidadDoctor,IdentificacionDoctor,SexoDoctor,Especialidad, FechaNacimiento")] Doctore doctore)
         {
+            if (doctore.FechaNacimiento.HasValue)
+            {
+                var today = DateTime.Today;
+                var birthDate = doctore.FechaNacimiento.Value;
+                var age = today.Year - birthDate.Year;
+                if (birthDate.Date > today.AddYears(-age)) age--;
+                doctore.EdadDoctor = age;
+            }
+
+            var existeIdentificacion = await _context.Doctores
+                .AnyAsync(d => d.IdentificacionDoctor == doctore.IdentificacionDoctor);
+
+            if (existeIdentificacion)
+            {
+                ModelState.AddModelError("IdentificacionDoctor", "La identificación ya existe.");
+            }
+
             if (ModelState.IsValid)
             {
                 _context.Add(doctore);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
+
+            PopulateNacionalidades();
+
+            ViewBag.Sexos = new SelectList(new[]
+    {
+        new { Value = "M", Text = "Masculino" },
+        new { Value = "F", Text = "Femenino" }
+    }, "Value", "Text");
+
+
             return View(doctore);
         }
 
@@ -152,11 +180,28 @@ namespace Meditrack.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdDoctor,NombreDoctor,TelefonoDoctor,EdadDoctor,NacionalidadDoctor,IdentificacionDoctor,SexoDoctor,Especialidad")] Doctore doctore)
+        public async Task<IActionResult> Edit(int id, [Bind("IdDoctor,NombreDoctor,TelefonoDoctor,EdadDoctor,NacionalidadDoctor,IdentificacionDoctor,SexoDoctor,Especialidad, FechaNacimiento")] Doctore doctore)
         {
             if (id != doctore.IdDoctor)
             {
                 return NotFound();
+            }
+
+            if (doctore.FechaNacimiento.HasValue)
+            {
+                var today = DateTime.Today;
+                var birthDate = doctore.FechaNacimiento.Value;
+                var age = today.Year - birthDate.Year;
+                if (birthDate.Date > today.AddYears(-age)) age--;
+                doctore.EdadDoctor = age;
+            }
+
+            var existeIdentificacion = await _context.Doctores
+                .AnyAsync(d => d.IdentificacionDoctor == doctore.IdentificacionDoctor);
+
+            if (existeIdentificacion)
+            {
+                ModelState.AddModelError("IdentificacionDoctor", "La identificación ya existe.");
             }
 
             if (ModelState.IsValid)
@@ -185,6 +230,8 @@ namespace Meditrack.Controllers
         new { Value = "M", Text = "Masculino" },
         new { Value = "F", Text = "Femenino" }
     }, "Value", "Text");
+
+            
 
             PopulateNacionalidades();
 

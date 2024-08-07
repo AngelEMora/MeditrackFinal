@@ -11,6 +11,11 @@
     <meta charset="utf-8" />
     <title>@ViewData["Title"] - Meditrack</title>
     <link rel="stylesheet" href="/css/listas.css" />
+    <style>
+        .text-danger {
+            color: red;
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar">
@@ -55,7 +60,7 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.TipoMedicamento)
                         </td>
-                        <td>
+                        <td class="@(item.PorDebajoDePuntoReorden ? "text-danger" : "")">
                             @Html.DisplayFor(modelItem => item.CantidadDisponible)
                         </td>
                         <td>

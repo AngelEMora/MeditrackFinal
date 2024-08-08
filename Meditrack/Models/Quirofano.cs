@@ -5,6 +5,11 @@ namespace Meditrack.Models
 {
     public partial class Quirofano
     {
+        public Quirofano()
+        {
+            CalendarioCirugia = new HashSet<CalendarioCirugia>();
+        }
+
         public int IdQuirofano { get; set; }
         public string NombreQuirofano { get; set; } = null!;
         public string? Ubicacion { get; set; }
@@ -13,5 +18,6 @@ namespace Meditrack.Models
         public string? DescripcionEstadoQuirofano { get; set; }
 
         public virtual EstadoQuirofano? EstadoQuirofanoNavigation { get; set; }
+        public virtual ICollection<CalendarioCirugia> CalendarioCirugia { get; set; }
     }
 }

@@ -21,7 +21,7 @@ namespace Meditrack.Controllers
         // GET: MaterialesQuirurgicoes
         public async Task<IActionResult> Index()
         {
-            var meditrackContext = _context.MaterialesQuirurgicos.Include(m => m.IdTipoMaterialQuirurgicoNavigation);
+            var meditrackContext = _context.MaterialesQuirurgicos.Include(m => m.IdMovimientoNavigation).Include(m => m.IdTipoMaterialQuirurgicoNavigation);
             return View(await meditrackContext.ToListAsync());
         }
 
@@ -34,6 +34,7 @@ namespace Meditrack.Controllers
             }
 
             var materialesQuirurgico = await _context.MaterialesQuirurgicos
+                .Include(m => m.IdMovimientoNavigation)
                 .Include(m => m.IdTipoMaterialQuirurgicoNavigation)
                 .FirstOrDefaultAsync(m => m.IdMaterial == id);
             if (materialesQuirurgico == null)
@@ -47,6 +48,7 @@ namespace Meditrack.Controllers
         // GET: MaterialesQuirurgicoes/Create
         public IActionResult Create()
         {
+            ViewData["IdMovimiento"] = new SelectList(_context.MovimientoInventarios, "IdMovimiento", "IdMovimiento");
             ViewData["IdTipoMaterialQuirurgico"] = new SelectList(_context.TipodeMaterialQuirurgicos, "IdTipoMaterialQuirurgico", "IdTipoMaterialQuirurgico");
             return View();
         }
@@ -56,7 +58,7 @@ namespace Meditrack.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdMaterial,NombreMaterial,Descripcion,Movimiento,CantidadDisponibleMaterialQuirurgico,IdTipoMaterialQuirurgico")] MaterialesQuirurgico materialesQuirurgico)
+        public async Task<IActionResult> Create([Bind("IdMaterial,NombreMaterial,Descripcion,CantidadDisponibleMaterialQuirurgico,IdTipoMaterialQuirurgico,IdMovimiento")] MaterialesQuirurgico materialesQuirurgico)
         {
             if (ModelState.IsValid)
             {
@@ -64,6 +66,7 @@ namespace Meditrack.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["IdMovimiento"] = new SelectList(_context.MovimientoInventarios, "IdMovimiento", "IdMovimiento", materialesQuirurgico.IdMovimiento);
             ViewData["IdTipoMaterialQuirurgico"] = new SelectList(_context.TipodeMaterialQuirurgicos, "IdTipoMaterialQuirurgico", "IdTipoMaterialQuirurgico", materialesQuirurgico.IdTipoMaterialQuirurgico);
             return View(materialesQuirurgico);
         }
@@ -81,6 +84,7 @@ namespace Meditrack.Controllers
             {
                 return NotFound();
             }
+            ViewData["IdMovimiento"] = new SelectList(_context.MovimientoInventarios, "IdMovimiento", "IdMovimiento", materialesQuirurgico.IdMovimiento);
             ViewData["IdTipoMaterialQuirurgico"] = new SelectList(_context.TipodeMaterialQuirurgicos, "IdTipoMaterialQuirurgico", "IdTipoMaterialQuirurgico", materialesQuirurgico.IdTipoMaterialQuirurgico);
             return View(materialesQuirurgico);
         }
@@ -90,7 +94,7 @@ namespace Meditrack.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdMaterial,NombreMaterial,Descripcion,Movimiento,CantidadDisponibleMaterialQuirurgico,IdTipoMaterialQuirurgico")] MaterialesQuirurgico materialesQuirurgico)
+        public async Task<IActionResult> Edit(int id, [Bind("IdMaterial,NombreMaterial,Descripcion,CantidadDisponibleMaterialQuirurgico,IdTipoMaterialQuirurgico,IdMovimiento")] MaterialesQuirurgico materialesQuirurgico)
         {
             if (id != materialesQuirurgico.IdMaterial)
             {
@@ -117,6 +121,7 @@ namespace Meditrack.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["IdMovimiento"] = new SelectList(_context.MovimientoInventarios, "IdMovimiento", "IdMovimiento", materialesQuirurgico.IdMovimiento);
             ViewData["IdTipoMaterialQuirurgico"] = new SelectList(_context.TipodeMaterialQuirurgicos, "IdTipoMaterialQuirurgico", "IdTipoMaterialQuirurgico", materialesQuirurgico.IdTipoMaterialQuirurgico);
             return View(materialesQuirurgico);
         }
@@ -130,6 +135,7 @@ namespace Meditrack.Controllers
             }
 
             var materialesQuirurgico = await _context.MaterialesQuirurgicos
+                .Include(m => m.IdMovimientoNavigation)
                 .Include(m => m.IdTipoMaterialQuirurgicoNavigation)
                 .FirstOrDefaultAsync(m => m.IdMaterial == id);
             if (materialesQuirurgico == null)

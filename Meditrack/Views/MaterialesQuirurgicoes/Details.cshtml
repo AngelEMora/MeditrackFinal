@@ -30,16 +30,16 @@
             @Html.DisplayFor(model => model.Descripcion)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Movimiento)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Movimiento)
-        </dd>
-        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.CantidadDisponibleMaterialQuirurgico)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.CantidadDisponibleMaterialQuirurgico)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdMovimientoNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IdMovimientoNavigation.IdMovimiento)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.IdTipoMaterialQuirurgicoNavigation)

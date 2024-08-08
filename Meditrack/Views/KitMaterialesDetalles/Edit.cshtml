@@ -1,0 +1,58 @@
+﻿@model Meditrack.Models.KitMaterialesDetalle
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+</head>
+<body>
+
+<h4>KitMaterialesDetalle</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="KitDetalleId" />
+            <div class="form-group">
+                <label asp-for="IdMaterial" class="control-label"></label>
+                <select asp-for="IdMaterial" class="form-control" asp-items="ViewBag.IdMaterial"></select>
+                <span asp-validation-for="IdMaterial" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdKitsCirugias" class="control-label"></label>
+                <select asp-for="IdKitsCirugias" class="form-control" asp-items="ViewBag.IdKitsCirugias"></select>
+                <span asp-validation-for="IdKitsCirugias" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Notas" class="control-label"></label>
+                <input asp-for="Notas" class="form-control" />
+                <span asp-validation-for="Notas" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cantidad" class="control-label"></label>
+                <input asp-for="Cantidad" class="form-control" />
+                <span asp-validation-for="Cantidad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+</body>
+</html>

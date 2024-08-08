@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Meditrack.Models.CalendarioCirugia>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaHoraCirugia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Observaciones)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdDoctorNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdEstadoCirugiasNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdPacienteNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdProcedimientoNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdQuirofanoNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaHoraCirugia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Observaciones)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdDoctorNavigation.IdDoctor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdEstadoCirugiasNavigation.IdEstadoCirugias)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdPacienteNavigation.IdPaciente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdProcedimientoNavigation.IdProcedimiento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdQuirofanoNavigation.IdQuirofano)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdCirugia">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdCirugia">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdCirugia">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</body>
+</html>

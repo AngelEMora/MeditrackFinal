@@ -1,152 +1,80 @@
-﻿ @model Meditrack.Models.Doctore
+﻿@model Meditrack.Models.Doctore
 
 @{
-    ViewData["Title"] = "Create";
     Layout = null;
 }
 
 <!DOCTYPE html>
+
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Crear Doctor</title>
-    <link rel="stylesheet" href="/css/create.css" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
 </head>
 <body>
 
-    <nav class="navbar">
-        <div class="navbar-container">
-            <a href="/" class="navbar-logo">
-                <img src="/images/MediTracklogo.png" alt="MediTrack Logo">
-            </a>
-            <div class="navbar-right">
-                <span class="navbar-user">
-                    <ion-icon name="person-sharp"></ion-icon>
-                    @User.Identity.Name
-                </span>
-                <a asp-action="Index" class="navbar-item">
-                    <ion-icon name="arrow-back-sharp"></ion-icon>
-                    Atras
-                </a>
-            </div>
-        </div>
-    </nav>
-
-    <div class="container">
-        <form class="form" asp-action="Create">
-            <h2>Doctor</h2>
-            <p>
-                Por favor, completa los siguientes campos para registrar un nuevo doctor en el sistema.
-            </p>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label asp-for="NombreDoctor" class="control-label">Nombre del Doctor</label>
-                    <input asp-for="NombreDoctor" class="box" />
-                    <span asp-validation-for="NombreDoctor" class="text-danger"></span>
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="TelefonoDoctor" class="control-label">Teléfono</label>
-                    <input asp-for="TelefonoDoctor" class="box" />
-                    <span asp-validation-for="TelefonoDoctor" class="text-danger"></span>
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="EdadDoctor" class="control-label">Edad</label>
-                    <input asp-for="EdadDoctor" type="number" class="box" id="edadDoctor" readonly />
-                    <span asp-validation-for="EdadDoctor" class="text-danger"></span>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label asp-for="NacionalidadDoctor" class="control-label">Nacionalidad</label>
-                    <select asp-for="NacionalidadDoctor" class="box" asp-items="ViewBag.Nacionalidades">
-                    </select>
-                    <span asp-validation-for="NacionalidadDoctor" class="text-danger"></span>
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="IdentificacionDoctor" class="control-label">Identificación</label>
-                    <input asp-for="IdentificacionDoctor" class="box" />
-                    <span asp-validation-for="IdentificacionDoctor" class="text-danger"></span>
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="SexoDoctor" class="control-label">Sexo</label>
-                    <select asp-for="SexoDoctor" class="box" asp-items="ViewBag.Sexos">
-                    </select>
-                    <span asp-validation-for="SexoDoctor" class="text-danger"></span>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label asp-for="Especialidad" class="control-label">Especialidad</label>
-                    <input asp-for="Especialidad" class="box" />
-                    <span asp-validation-for="Especialidad" class="text-danger"></span>
-                </div>
-
+<h4>Doctore</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="FechaNacimiento" class="control-label">Fecha de Nacimiento</label>
-                    <input asp-for="FechaNacimiento" class="box" type="date" id="fechaNacimiento" />
+                <label asp-for="NombreDoctor" class="control-label"></label>
+                <input asp-for="NombreDoctor" class="form-control" />
+                <span asp-validation-for="NombreDoctor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TelefonoDoctor" class="control-label"></label>
+                <input asp-for="TelefonoDoctor" class="form-control" />
+                <span asp-validation-for="TelefonoDoctor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EdadDoctor" class="control-label"></label>
+                <input asp-for="EdadDoctor" class="form-control" />
+                <span asp-validation-for="EdadDoctor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NacionalidadDoctor" class="control-label"></label>
+                <input asp-for="NacionalidadDoctor" class="form-control" />
+                <span asp-validation-for="NacionalidadDoctor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdentificacionDoctor" class="control-label"></label>
+                <input asp-for="IdentificacionDoctor" class="form-control" />
+                <span asp-validation-for="IdentificacionDoctor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SexoDoctor" class="control-label"></label>
+                <input asp-for="SexoDoctor" class="form-control" />
+                <span asp-validation-for="SexoDoctor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FechaNacimiento" class="control-label"></label>
+                <input asp-for="FechaNacimiento" class="form-control" />
                 <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
             </div>
-
-                @* <div class="form-group">
-                    <label asp-for="FechaNacimiento" class="control-label">Fecha de Nacimiento</label>
-                    <input asp-for="FechaNacimiento" class="box" id="fechaNacimiento" />
-                    <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
-                </div> *@
+            <div class="form-group">
+                <label asp-for="IdEspecialidad" class="control-label"></label>
+                <select asp-for="IdEspecialidad" class ="form-control" asp-items="ViewBag.IdEspecialidad"></select>
             </div>
-
-            <input type="submit" value="Enviar" class="submit">
+            <div class="form-group">
+                <label asp-for="IdOcupacion" class="control-label"></label>
+                <select asp-for="IdOcupacion" class ="form-control" asp-items="ViewBag.IdOcupacion"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
         </form>
-
-        <div class="info">
-            <img src="/images/MediTracklogo.png" class="img-1" alt="MediTrack Logo">
-            <div class="location">
-                <div class="icons">
-                    <ion-icon name="location-outline" class="icono"></ion-icon>
-                    <p>Carretera Mella No. 1 en la ciudad de San Pedro de Macorís, RD.</p>
-                </div>
-                <div class="icons">
-                    <ion-icon name="call-outline" class="icono"></ion-icon>
-                    <p>809-529-7022</p>
-                </div>
-                <div class="icons">
-                    <ion-icon name="mail-outline" class="icono"></ion-icon>
-                    <p>hospitaldr.antoniomusa@hotmail.com</p>
-                </div>
-            </div>
-        </div>
     </div>
+</div>
 
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
 
-    <script>
-        $(document).ready(function () {
-            function calcularEdad() {
-                var fechaNacimiento = new Date($('#fechaNacimiento').val());
-                var hoy = new Date();
-                var edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
-                var mes = hoy.getMonth() - fechaNacimiento.getMonth();
-                if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNacimiento.getDate())) {
-                    edad--;
-                }
-                $('#edadDoctor').val(edad);
-            }
-
-            $('#fechaNacimiento').on('change', calcularEdad);
-
-            $('form').on('submit', function () {
-                calcularEdad();
-            });
-        });
-    </script>
-
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
 </body>
 </html>

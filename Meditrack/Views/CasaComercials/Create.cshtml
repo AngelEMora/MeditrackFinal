@@ -1,0 +1,62 @@
+﻿@model Meditrack.Models.CasaComercial
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+</head>
+<body>
+
+<h4>CasaComercial</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NombreCasaComercial" class="control-label"></label>
+                <input asp-for="NombreCasaComercial" class="form-control" />
+                <span asp-validation-for="NombreCasaComercial" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DireccionCasaComercial" class="control-label"></label>
+                <input asp-for="DireccionCasaComercial" class="form-control" />
+                <span asp-validation-for="DireccionCasaComercial" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TelefonoCasaComercial" class="control-label"></label>
+                <input asp-for="TelefonoCasaComercial" class="form-control" />
+                <span asp-validation-for="TelefonoCasaComercial" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CorreoCasaComercial" class="control-label"></label>
+                <input asp-for="CorreoCasaComercial" class="form-control" />
+                <span asp-validation-for="CorreoCasaComercial" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WebCasaComercial" class="control-label"></label>
+                <input asp-for="WebCasaComercial" class="form-control" />
+                <span asp-validation-for="WebCasaComercial" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+</body>
+</html>

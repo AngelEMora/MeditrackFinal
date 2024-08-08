@@ -1,4 +1,4 @@
-﻿@* @model Meditrack.Models.MaterialesQuirurgico
+﻿@model Meditrack.Models.MaterialesQuirurgico
 
 @{
     Layout = null;
@@ -31,16 +31,16 @@
             @Html.DisplayFor(model => model.Descripcion)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Movimiento)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Movimiento)
-        </dd>
-        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.CantidadDisponibleMaterialQuirurgico)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.CantidadDisponibleMaterialQuirurgico)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdMovimientoNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IdMovimientoNavigation.IdMovimiento)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.IdTipoMaterialQuirurgicoNavigation)
@@ -56,82 +56,5 @@
         <a asp-action="Index">Back to List</a>
     </form>
 </div>
-</body>
-</html> *@
-
-@model Meditrack.Models.MaterialesQuirurgico
-
-@{
-    ViewData["Title"] = "Delete";
-    Layout = null;
-}
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewData["Title"] - Delete</title>
-    <link rel="stylesheet" href="/css/delete.css" />
-</head>
-<body>
-
-    <nav class="navbar">
-        <div class="navbar-container">
-            <a href="/" class="navbar-logo">
-                <img src="/images/MediTracklogo.png" alt="MediTrack Logo">
-            </a>
-            <div class="navbar-right">
-                <span class="navbar-user">
-                    <ion-icon name="person-sharp"></ion-icon>
-                    @User.Identity.Name
-                </span>
-
-                <a asp-action="Index" class="navbar-item">
-                    <ion-icon name="arrow-back-sharp"></ion-icon>
-                    Atras
-                </a>
-            </div>
-        </div>
-    </nav>
-
-    <div class="container">
-        <h1>Eliminar Material Quirúrgico</h1>
-        <h3>¿Estás seguro de que deseas eliminar este material quirúrgico?</h3>
-        <div class="details">
-            <h4>Material Quirúrgico</h4>
-            <hr />
-            <div class="details-grid">
-                <div class="details-item">
-                    <dt>@Html.DisplayNameFor(model => model.NombreMaterial):</dt>
-                    <dd>@Html.DisplayFor(model => model.NombreMaterial)</dd>
-                </div>
-                <div class="details-item">
-                    <dt>@Html.DisplayNameFor(model => model.Descripcion):</dt>
-                    <dd>@Html.DisplayFor(model => model.Descripcion)</dd>
-                </div>
-                <div class="details-item">
-                    <dt>@Html.DisplayNameFor(model => model.Movimiento):</dt>
-                    <dd>@Html.DisplayFor(model => model.Movimiento)</dd>
-                </div>
-                <div class="details-item">
-                    <dt>@Html.DisplayNameFor(model => model.CantidadDisponibleMaterialQuirurgico):</dt>
-                    <dd>@Html.DisplayFor(model => model.CantidadDisponibleMaterialQuirurgico)</dd>
-                </div>
-                <div class="details-item">
-                    <dt>@Html.DisplayNameFor(model => model.IdTipoMaterialQuirurgicoNavigation):</dt>
-                    <dd>@Html.DisplayFor(model => model.IdTipoMaterialQuirurgicoNavigation.IdTipoMaterialQuirurgico)</dd>
-                </div>
-            </div>
-        </div>
-
-        <form asp-action="Delete">
-            <input type="hidden" asp-for="IdMaterial" />
-            <button type="submit" class="btn btn-danger">Eliminar</button>
-            <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
-        </form>
-    </div>
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
 </html>

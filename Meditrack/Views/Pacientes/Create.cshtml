@@ -1,11 +1,17 @@
-﻿@* @model Meditrack.Models.Paciente
+﻿@model Meditrack.Models.Paciente
 
 @{
-    ViewData["Title"] = "Create";
     Layout = null;
 }
 
-<h1>Create</h1>
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+</head>
+<body>
 
 <h4>Paciente</h4>
 <hr />
@@ -72,192 +78,10 @@
 
 <div>
     <a asp-action="Index">Back to List</a>
-</div> *@
-
-
-@model Meditrack.Models.Paciente
-
-@{
-    ViewData["Title"] = "Create";
-    Layout = null; 
-}
-
-<!DOCTYPE html>
-<html>
-<body>
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Crear </title>
-    <link rel="stylesheet" href="/css/create.css" />
-    
-</head>
-
-    <nav class="navbar">
-        <div class="navbar-container">
-            <a href="/" class="navbar-logo">
-                <img src="/images/MediTracklogo.png" alt="MediTrack Logo">
-            </a>
-            <div class="navbar-right">
-              @*   <span class="navbar-username">@User.Identity.Name</span>
-                <a asp-action="Index" class="navbar-logout">Salir</a> *@
-
-                <span class="navbar-user">
-                    <ion-icon name="person-sharp"></ion-icon>
-                    @User.Identity.Name
-                </span>
-               
-                <a asp-action="Index" class="navbar-item">
-                    <ion-icon name="arrow-back-sharp"></ion-icon>
-                    Atras
-                </a>
-            </div>
-
-           
-        </div>
-    </nav>
-
-<div class="container">
-    <form class="form" asp-action="Create">
-        <h2>Paciente</h2>
-        <p>
-            Agradecemos tu dedicación al completar este formulario, 
-            que nos ayudará a proporcionar el mejor cuidado posible a 
-            nuestros pacientes. La información recopilada será fundamental 
-            para comprender mejor las necesidades médicas y garantizar un tratamiento
-            efectivo. Por favor, asegúrate de completar todos los campos 
-            requeridos con la información más precisa y actualizada disponible.
-        </p>
-
-        <div class="form-row">
-            <div class="form-group">
-                <label asp-for="NombrePaciente" class="control-label">Nombre del Paciente</label>
-                <input asp-for="NombrePaciente" class="box" />
-                <span asp-validation-for="NombrePaciente" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="FechaNacimiento" class="control-label">Fecha de Nacimiento</label>
-                    <input asp-for="FechaNacimiento" type="date" class="box" id="fechaNacimiento" />
-                <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="SexoPaciente" class="control-label">Sexo</label>
-                <select asp-for="SexoPaciente" class="box">
-                    <option value="">Selecciona tu sexo</option>
-                    <option value="F">Femenino</option>
-                    <option value="M">Masculino</option>
-                </select>
-                <span asp-validation-for="SexoPaciente" class="text-danger"></span>
-            </div>
-        </div>
-
-        <div class="form-row">
-            <div class="form-group">
-                <label asp-for="EdadPaciente" class="control-label">Edad</label>
-                    <input asp-for="EdadPaciente" type="number" class="box" id="edadPaciente" readonly />
-                <span asp-validation-for="EdadPaciente" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="IdentificacionPaciente" class="control-label">Identificación</label>
-                <input asp-for="IdentificacionPaciente" class="box" />
-                <span asp-validation-for="IdentificacionPaciente" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="NacionalidadPaciente" class="control-label">Nacionalidad</label>
-                    <select asp-for="NacionalidadPaciente" class="box" asp-items="ViewBag.Nacionalidades">
-                    </select>
-                <span asp-validation-for="NacionalidadPaciente" class="text-danger"></span>
-            </div>
-        </div>
-
-        <div class="form-row">
-            <div class="form-group">
-                <label asp-for="TelefonoPaciente" class="control-label">Teléfono</label>
-                <input asp-for="TelefonoPaciente" class="box" />
-                <span asp-validation-for="TelefonoPaciente" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="TipoSanguineo" class="control-label">Tipo Sanguíneo</label>
-                <select asp-for="TipoSanguineo" class="box">
-                    <option value="">Selecciona tu tipo sanguíneo</option>
-                    <option value="A+">A+</option>
-                    <option value="B+">B+</option>
-                    <option value="AB+">AB+</option>
-                    <option value="O+">O+</option>
-                        <option value="A-">A-</option>
-                        <option value="B-">B-</option>
-                        <option value="AB-">AB-</option>
-                        <option value="O-">O-</option>
-                </select>
-                <span asp-validation-for="TipoSanguineo" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="SeguroMedico" class="control-label">Seguro Médico</label>
-                <input asp-for="SeguroMedico" class="box" />
-                <span asp-validation-for="SeguroMedico" class="text-danger"></span>
-            </div>
-        </div>
-
-        <div class="form-row">
-            <div class="form-group">
-                <label asp-for="HistorialMedico" class="control-label">Historial Médico</label>
-                <textarea asp-for="HistorialMedico" class="box"></textarea>
-                <span asp-validation-for="HistorialMedico" class="text-danger"></span>
-            </div>
-        </div>
-
-        <input type="submit" value="Guardar" class="submit">
-            
-    </form>
-
-    <div class="info">
-        <img src="/images/MediTracklogo.png" class="img-1" alt="MediTrack Logo">
-        <div class="location">
-            <div class="icons">
-                <ion-icon name="location-outline" class="icono"></ion-icon>
-                <p>Carretera Mella No. 1 en la ciudad de San Pedro de Macorís, RD.</p>
-            </div>
-            <div class="icons">
-                <ion-icon name="call-outline" class="icono"></ion-icon>
-                <p>809-529-7022</p>
-            </div>
-            <div class="icons">
-                <ion-icon name="mail-outline" class="icono"></ion-icon>
-                <p>hospitaldr.antoniomusa@hotmail.com</p>
-            </div>
-        </div>
-    </div>
 </div>
 
-<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-
-    <script>
-        $(document).ready(function () {
-            function calcularEdad() {
-                var fechaNacimiento = new Date($('#fechaNacimiento').val());
-                var hoy = new Date();
-                var edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
-                var mes = hoy.getMonth() - fechaNacimiento.getMonth();
-                if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNacimiento.getDate())) {
-                    edad--;
-                }
-                $('#edadPaciente').val(edad);
-            }
-
-            $('#fechaNacimiento').on('change', calcularEdad);
-
-            $('form').on('submit', function () {
-                calcularEdad();
-            });
-        });
-    </script>
-
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
 </body>
 </html>

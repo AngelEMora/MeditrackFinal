@@ -1,0 +1,83 @@
+﻿@model Meditrack.Models.Medicamento
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+</head>
+<body>
+
+<h4>Medicamento</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdMedicamento" />
+            <div class="form-group">
+                <label asp-for="NombreMedicamento" class="control-label"></label>
+                <input asp-for="NombreMedicamento" class="form-control" />
+                <span asp-validation-for="NombreMedicamento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdTipoMedicamento" class="control-label"></label>
+                <select asp-for="IdTipoMedicamento" class="form-control" asp-items="ViewBag.IdTipoMedicamento"></select>
+                <span asp-validation-for="IdTipoMedicamento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CantidadDisponibleMedicamentos" class="control-label"></label>
+                <input asp-for="CantidadDisponibleMedicamentos" class="form-control" />
+                <span asp-validation-for="CantidadDisponibleMedicamentos" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdMovimiento" class="control-label"></label>
+                <select asp-for="IdMovimiento" class="form-control" asp-items="ViewBag.IdMovimiento"></select>
+                <span asp-validation-for="IdMovimiento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FechaVencimiento" class="control-label"></label>
+                <input asp-for="FechaVencimiento" class="form-control" />
+                <span asp-validation-for="FechaVencimiento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Distribuidor" class="control-label"></label>
+                <input asp-for="Distribuidor" class="form-control" />
+                <span asp-validation-for="Distribuidor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PuntosReorden" class="control-label"></label>
+                <input asp-for="PuntosReorden" class="form-control" />
+                <span asp-validation-for="PuntosReorden" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Lote" class="control-label"></label>
+                <input asp-for="Lote" class="form-control" />
+                <span asp-validation-for="Lote" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FechaFabricacion" class="control-label"></label>
+                <input asp-for="FechaFabricacion" class="form-control" />
+                <span asp-validation-for="FechaFabricacion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+</body>
+</html>

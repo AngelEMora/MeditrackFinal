@@ -1,11 +1,17 @@
 ﻿@model Meditrack.Models.Usuario
 
 @{
-    ViewData["Title"] = "Details";
     Layout = null;
 }
 
-<h1>Details</h1>
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
 
 <div>
     <h4>Usuario</h4>
@@ -24,16 +30,16 @@
             @Html.DisplayFor(model => model.Contrasena)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NombreCompleto)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NombreCompleto)
-        </dd>
-        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.FechaDeRegistro)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.FechaDeRegistro)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdDoctorNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IdDoctorNavigation.IdDoctor)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.IdEstadoUsuarioNavigation)
@@ -42,10 +48,16 @@
             @Html.DisplayFor(model => model.IdEstadoUsuarioNavigation.IdEstadoUsuario)
         </dd>
         <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NombreRolNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NombreRolNavigation.Nombre)
+        </dd>
+        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Rol)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Rol.IdRol)
+            @Html.DisplayFor(model => model.Rol.Nombre)
         </dd>
     </dl>
 </div>
@@ -53,3 +65,5 @@
     <a asp-action="Edit" asp-route-id="@Model?.IdUsuario">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
+</body>
+</html>

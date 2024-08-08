@@ -47,8 +47,8 @@ namespace Meditrack.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                //                optionsBuilder.UseSqlServer("Server=.;Database=Meditrack;Trusted_Connection=True;");
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("Server=.;Database=Meditrack;Trusted_Connection=True;");
             }
         }
 
@@ -177,6 +177,10 @@ namespace Meditrack.Models
                     .IsUnique();
 
                 entity.Property(e => e.IdDoctor).HasColumnName("ID_Doctor");
+
+                entity.Property(e => e.ApellidosDoctor)
+                    .HasMaxLength(20)
+                    .IsFixedLength();
 
                 entity.Property(e => e.FechaNacimiento).HasColumnType("date");
 
@@ -703,13 +707,11 @@ namespace Meditrack.Models
                     .HasColumnType("date")
                     .HasDefaultValueSql("(getdate())");
 
+                entity.Property(e => e.IdDoctor).HasColumnName("ID_Doctor");
+
                 entity.Property(e => e.IdEstadoUsuario)
                     .HasColumnName("ID_Estado_Usuario")
                     .HasDefaultValueSql("((1))");
-
-                entity.Property(e => e.NombreCompleto)
-                    .HasMaxLength(80)
-                    .IsUnicode(false);
 
                 entity.Property(e => e.NombreRol)
                     .HasMaxLength(50)
@@ -718,6 +720,11 @@ namespace Meditrack.Models
                 entity.Property(e => e.NombreUsuario)
                     .HasMaxLength(50)
                     .IsUnicode(false);
+
+                entity.HasOne(d => d.IdDoctorNavigation)
+                    .WithMany(p => p.Usuarios)
+                    .HasForeignKey(d => d.IdDoctor)
+                    .HasConstraintName("FK_Usuario_Doctores");
 
                 entity.HasOne(d => d.IdEstadoUsuarioNavigation)
                     .WithMany(p => p.Usuarios)

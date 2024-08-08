@@ -58,7 +58,7 @@ namespace Meditrack.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdDoctor,NombreDoctor,TelefonoDoctor,EdadDoctor,NacionalidadDoctor,IdentificacionDoctor,SexoDoctor,FechaNacimiento,IdEspecialidad,IdOcupacion")] Doctore doctore)
+        public async Task<IActionResult> Create([Bind("IdDoctor,NombreDoctor,ApellidosDoctor,TelefonoDoctor,EdadDoctor,NacionalidadDoctor,IdentificacionDoctor,SexoDoctor,FechaNacimiento,IdEspecialidad,IdOcupacion")] Doctore doctore)
         {
             if (ModelState.IsValid)
             {
@@ -94,7 +94,7 @@ namespace Meditrack.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdDoctor,NombreDoctor,TelefonoDoctor,EdadDoctor,NacionalidadDoctor,IdentificacionDoctor,SexoDoctor,FechaNacimiento,IdEspecialidad,IdOcupacion")] Doctore doctore)
+        public async Task<IActionResult> Edit(int id, [Bind("IdDoctor,NombreDoctor,ApellidosDoctor,TelefonoDoctor,EdadDoctor,NacionalidadDoctor,IdentificacionDoctor,SexoDoctor,FechaNacimiento,IdEspecialidad,IdOcupacion")] Doctore doctore)
         {
             if (id != doctore.IdDoctor)
             {

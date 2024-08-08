@@ -1,102 +1,73 @@
 ﻿@model Meditrack.Models.Usuario
 
 @{
-    ViewData["Title"] = "Edit";
     Layout = null;
 }
 
 <!DOCTYPE html>
+
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Editar</title>
-    <link rel="stylesheet" href="/css/edit.css" />
-    <!-- Agrega aquí tus estilos adicionales si es necesario -->
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
 </head>
 <body>
 
-    <nav class="navbar">
-        <div class="navbar-container">
-            <a href="/" class="navbar-logo">
-                <img src="/images/MediTracklogo.png" alt="MediTrack Logo">
-            </a>
-            <div class="navbar-right">
-                <span class="navbar-user">
-                    <ion-icon name="person-sharp"></ion-icon>
-                    @User.Identity.Name
-                </span>
-                <a asp-action="Index" class="navbar-item">
-                    <ion-icon name="arrow-back-sharp"></ion-icon>
-                    Atrás
-                </a>
-            </div>
-        </div>
-    </nav>
-
-    <div class="container">
-        <form asp-action="Edit" method="post" class="form">
-            <h2>Editando Usuario</h2>
+<h4>Usuario</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="IdUsuario" />
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label asp-for="NombreUsuario" class="control-label">Nombre de Usuario</label>
-                    <input asp-for="NombreUsuario" class="box" />
-                    <span asp-validation-for="NombreUsuario" class="text-danger"></span>
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="Contrasena" class="control-label">Contraseña</label>
-                    <input asp-for="Contrasena" type="password" class="box" />
-                    <span asp-validation-for="Contrasena" class="text-danger"></span>
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="NombreCompleto" class="control-label">Nombre Completo</label>
-                    <input asp-for="NombreCompleto" class="box" />
-                    <span asp-validation-for="NombreCompleto" class="text-danger"></span>
-                </div>
+            <div class="form-group">
+                <label asp-for="NombreUsuario" class="control-label"></label>
+                <input asp-for="NombreUsuario" class="form-control" />
+                <span asp-validation-for="NombreUsuario" class="text-danger"></span>
             </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label asp-for="RolId" class="control-label">Rol</label>
-                    <select asp-for="RolId" class="box" asp-items="ViewBag.RolId"></select>
-                    <span asp-validation-for="RolId" class="text-danger"></span>
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="IdEstadoUsuario" class="control-label">Estado</label>
-                    <select asp-for="IdEstadoUsuario" class="box" asp-items="ViewBag.IdEstadoUsuario"></select>
-                    <span asp-validation-for="IdEstadoUsuario" class="text-danger"></span>
-                </div>
+            <div class="form-group">
+                <label asp-for="Contrasena" class="control-label"></label>
+                <input asp-for="Contrasena" class="form-control" />
+                <span asp-validation-for="Contrasena" class="text-danger"></span>
             </div>
-
-            <button type="submit" class="submit">Guardar</button>
+            <div class="form-group">
+                <label asp-for="RolId" class="control-label"></label>
+                <select asp-for="RolId" class="form-control" asp-items="ViewBag.RolId"></select>
+                <span asp-validation-for="RolId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FechaDeRegistro" class="control-label"></label>
+                <input asp-for="FechaDeRegistro" class="form-control" />
+                <span asp-validation-for="FechaDeRegistro" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdEstadoUsuario" class="control-label"></label>
+                <select asp-for="IdEstadoUsuario" class="form-control" asp-items="ViewBag.IdEstadoUsuario"></select>
+                <span asp-validation-for="IdEstadoUsuario" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NombreRol" class="control-label"></label>
+                <select asp-for="NombreRol" class="form-control" asp-items="ViewBag.NombreRol"></select>
+                <span asp-validation-for="NombreRol" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdDoctor" class="control-label"></label>
+                <select asp-for="IdDoctor" class="form-control" asp-items="ViewBag.IdDoctor"></select>
+                <span asp-validation-for="IdDoctor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
         </form>
-
-        <div class="info">
-            <img src="/images/MediTracklogo.png" class="img-1" alt="MediTrack Logo">
-            <div class="location">
-                <div class="icons">
-                    <ion-icon name="location-outline" class="icono"></ion-icon>
-                    <p>Carretera Mella No. 1 en la ciudad de San Pedro de Macorís, RD.</p>
-                </div>
-                <div class="icons">
-                    <ion-icon name="call-outline" class="icono"></ion-icon>
-                    <p>809-529-7022</p>
-                </div>
-                <div class="icons">
-                    <ion-icon name="mail-outline" class="icono"></ion-icon>
-                    <p>hospitaldr.antoniomusa@hotmail.com</p>
-                </div>
-            </div>
-        </div>
     </div>
+</div>
 
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
 </body>
 </html>

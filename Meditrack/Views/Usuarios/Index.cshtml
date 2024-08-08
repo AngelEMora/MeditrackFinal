@@ -1,107 +1,79 @@
 ﻿@model IEnumerable<Meditrack.Models.Usuario>
 
 @{
-    ViewData["Title"] = "Index";
     Layout = null;
 }
 
 <!DOCTYPE html>
+
 <html>
 <head>
-    <meta charset="utf-8" />
-    <title>@ViewData["Title"] - Meditrack</title>
-    <link rel="stylesheet" href="/css/listas.css" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="logo">
-            <img src="/images/MediTracklogo.png" alt="Logo" />
-            <span>Meditrack</span>
-        </div>
-        <div class="user-info">
-            <span>
-                <ion-icon name="person-sharp"></ion-icon>
-                @User.Identity.Name
-            </span>
-            <a href="@Url.Action("Principal", "Inicio")" class="navbar-item">
-                <ion-icon name="arrow-back-sharp"></ion-icon>
-                Atras
-            </a>
-        </div>
-    </nav>
-
-    <div class="container">
-        <h1>Lista de Usuarios</h1>
-        <div class="action-buttons">
-            <form asp-action="Index" method="get" class="search-bar">
-                <input type="text" name="searchString" value="@ViewBag.SearchString" placeholder="Buscar" />
-                <button type="submit">
-                    <ion-icon name="search-sharp"></ion-icon>
-                </button>
-            </form>
-            <form asp-action="Create" method="get" style="display: inline;">
-                <button type="submit" class="btn btn-primary">Agregar usuario</button>
-            </form>
-        </div>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Nombre de Usuario</th>
-                    <th>Contraseña</th>
-                    <th>Nombre Completo</th>
-                    <th>Fecha de Registro</th>
-                    <th>Estado de Usuario</th>
-                    <th>Rol</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.NombreUsuario)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Contrasena)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.NombreCompleto)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.FechaDeRegistro)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.IdEstadoUsuario)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.NombreRol)
-                        </td>
-                        <td>
-                            <a asp-action="Edit" asp-route-id="@item.IdUsuario">Edit</a> |
-                            <a asp-action="Details" asp-route-id="@item.IdUsuario">Details</a> |
-                            <a asp-action="Delete" asp-route-id="@item.IdUsuario">Delete</a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-        <div class="pagination">
-            @{
-                int totalRecords = ViewBag.TotalRecords != null ? (int)ViewBag.TotalRecords : 0;
-                int pageSize = ViewBag.PageSize != null ? (int)ViewBag.PageSize : 1;
-
-                int totalPages = (int)Math.Ceiling((double)totalRecords / pageSize);
-                for (int i = 1; i <= totalPages; i++)
-                {
-                    <a asp-action="Index" asp-route-pageNumber="@i" class="@(i == ViewBag.PageNumber ? "active" : "")">@i</a>
-                }
-            }
-        </div>
-    </div>
-
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NombreUsuario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Contrasena)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaDeRegistro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdDoctorNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdEstadoUsuarioNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NombreRolNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rol)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreUsuario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Contrasena)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaDeRegistro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdDoctorNavigation.IdDoctor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdEstadoUsuarioNavigation.IdEstadoUsuario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreRolNavigation.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rol.Nombre)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdUsuario">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdUsuario">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdUsuario">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
 </body>
 </html>
-

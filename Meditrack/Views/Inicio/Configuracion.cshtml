@@ -20,11 +20,20 @@
     <div class="navbar">
         <div class="navbar-left">
             <img src="/images/MediTracklogo.png" alt="Logo de la página" class="navbar-logo">
-            <span class="navbar-user">@User.Identity.Name</span>
+            
         </div>
         <div class="navbar-right">
-            <a href="@Url.Action("Principal", "Inicio")" class="navbar-item">Atras</a>
+            
 
+            <span class="navbar-user">
+                <ion-icon name="person-sharp"></ion-icon>
+                @User.Identity.Name
+            </span>
+           
+            <a href="@Url.Action("Principal", "Inicio")" class="navbar-item">
+                <ion-icon name="arrow-back-sharp"></ion-icon>
+                Atras
+            </a>
 
         </div>
     </div>
@@ -37,31 +46,21 @@
         ">
         Configuraciones
     </h1>
-
     <div class="menu">
-        <a href="/TiposdeMedicamentoes/Index" class="menu-item">
-            <img src="/images/TipoMedicamento.jpg" alt="TipoMedicamento">
-            <p>Tipo de medicamento</p>
+
+        <a href="/CasaComercials/Index" class="menu-item">
+            <img src="/images/CasaComercial.jpg" alt="CasaComercials">
+            <p>Casas comerciales</p>
         </a>
 
-        <a href="/KitsMedicamentoes/Index" class="menu-item">
-            <img src="/images/kitsMedicamentos.jpg" alt="kitsMedicameto">
-            <p>Kits de medicametos</p>
+        <a href="/Distribuidors/Index" class="menu-item">
+            <img src="/images/Distribuidor.jpg" alt="Distribuidor">
+            <p>Distribuidores</p>
         </a>
 
-        <a href="/TipodeMaterialQuirurgicoes/Index" class="menu-item">
-            <img src="/images/tiposMateriales.jpg" alt="TipoMaterialQuirurgico">
-            <p>Tipo de material quirurgico</p>
-        </a>
-
-        <a href="/KitsMaterialesQuirurgicoes/Index" class="menu-item">
-            <img src="/images/kitsMateriales.jpg" alt="kitsMaterialQuirurgico">
-            <p>Kits de materiales quirurgico</p>
-        </a>
-
-        <a href="/EstadoQuirofanoes/Index" class="menu-item">
-            <img src="/images/EstadoQuirofano.jpg" alt="EstadoQuirofano">
-            <p>Estado del quirofano</p>
+        <a href="/EspeciialidadesMedicas/Index" class="menu-item">
+            <img src="/images/Especialidades.jpg" alt="Especialidades">
+            <p>Especiialidades Medicas</p>
         </a>
 
         <a href="/EstadosdelosMaterialesQuirurgicoes/Index" class="menu-item">
@@ -69,9 +68,64 @@
             <p>Estado del Material Quirurgico</p>
         </a>
 
+        <a href="/EstadoQuirofanoes/Index" class="menu-item">
+            <img src="/images/estadoCiru.png" alt="EstadoQuirofano">
+            <p>Estado del quirofano</p>
+        </a>
+
+        <a href="/EstadosCirugias/Index" class="menu-item">
+            <img src="/images/EstadoQuirofano.jpg" alt="EstadoCirugia">
+            <p>Estados de las cirugias</p>
+        </a>
+
+        <a href="/EstadosUsuarios/Index" class="menu-item">
+            <img src="/images/EstadoU2.jpg" alt="EUsuarios">
+            <p>Estados de los Usuarios</p>
+        </a>
+
+        <a href="/KitsMaterialesQuirurgicoes/Index" class="menu-item">
+            <img src="/images/kitsMateriales.jpg" alt="kitsMaterialQuirurgico">
+            <p>Kits de materiales quirurgico</p>
+        </a>
+
+        <a href="/KitsMedicamentoes/Index" class="menu-item">
+            <img src="/images/kitsMedicamentos.jpg" alt="kitsMedicameto">
+            <p>Kits de medicametos</p>
+        </a>
+
+        <a href="/MovimientoInventarios/Index" class="menu-item">
+            <img src="/images/Movimiento2.jpg" alt="MovInventarios">
+            <p>Movimientos del Inventario</p>
+        </a>
+
+        <a href="/OcupacionMedicas/Index" class="menu-item">
+            <img src="/images/Ocupacion.jpg" alt="Ocupacion">
+            <p>Ocupaciones Medicas</p>
+        </a>
+
+        <a href="/Roles/Index" class="menu-item">
+            <img src="/images/Roles2.jpg" alt="Roles">
+            <p>Roles del sistema</p>
+        </a>
+
+        <a href="/TiposdeMedicamentoes/Index" class="menu-item">
+            <img src="/images/TipoMedicamento.jpg" alt="TipoMedicamento">
+            <p>Tipo de medicamento</p>
+        </a>
+
+        <a href="/TipodeMaterialQuirurgicoes/Index" class="menu-item">
+            <img src="/images/tiposMateriales.jpg" alt="TipoMaterialQuirurgico">
+            <p>Tipo de material quirurgico</p>
+        </a>
+    </div>
+
 
     </div>
     <script src="principal.js"></script>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
 </body>
 
 
